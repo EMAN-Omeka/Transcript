@@ -1,0 +1,50 @@
+{
+  "name": "magnificent",
+  "version": "2.2.3",
+  "description": "Zoom responsively.",
+  "main": [
+    "src/js/mag-analytics.js",
+    "src/js/mag.js",
+    "src/js/mag-jquery.js",
+    "src/js/mag-control.js",
+    "src/css/mag.css",
+    "src/theme/default.css"
+  ],
+  "authors": [
+    {
+      "name": "Anders D. Johnson",
+      "homepage": "https://github.com/AndersDJohnson"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "jquery-bridget": "~1.1.0",
+    "jquery-mousewheel": "~3.1.12",
+    "jquery.threedubmedia": "threedubmedia/jquery.threedubmedia",
+    "screenfull": "~2.0.0",
+    "google-analytics-js": "^0.1.0",
+    "hammerjs": "~2.0.4",
+    "prevent-ghost-click": "~0.0.0"
+  },
+  "devDependencies": {
+    "bootstrap": "~3.3.2"
+  },
+  "optional": {
+    "files": {
+      "src/theme/default.css": "Or another theme.",
+      "src/js/mag-control.js": "For controls.",
+      "src/js/mag-analytics.js": "For analytics. Please :).",
+      "bower_components/jquery-mousewheel/jquery.mousewheel.js": "For scroll/touchpad-pinch zoom.",
+      "bower_components/jquery.threedubmedia/event.drag/jquery.event.drag.js": "For drag interaction.",
+      "bower_components/screenfull/dist/screenfull.js": "For fullscreen.",
+      "bower_components/hammerjs/hammer.js": "For touch interaction (pan, pinch).",
+      "bower_components/prevent-ghost-click/PreventGhostClick.js": "For touch interaction (pan, pinch).",
+      "bower_components/google-analytics-js/gajs.js": "For analytics. Please :)."
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/AndersDJohnson/magnificent.js.git"
+  }
+}

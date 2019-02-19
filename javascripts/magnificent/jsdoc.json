@@ -1,0 +1,41 @@
+{
+    "tags": {
+        "allowUnknownTags" : true
+    },
+    "plugins": ["plugins/markdown"],
+    "source": {
+        "includePattern": ".+\\.js(doc)?$"
+    },
+    "opts": {
+        "encoding": "utf8",
+        "recurse": true,
+        "query": "value",
+        "private": true,
+        "lenient": true
+    },
+    "templates": {
+        "cleverLinks"           : false,
+        "monospaceLinks"        : false,
+        "dateFormat"            : "ddd MMM Do YYYY",
+        "outputSourceFiles"     : true,
+        "outputSourcePath"      : true,
+        "systemName"            : "Magnificent.js",
+        "footer"                : "<a href=\"https://github.com/AndersDJohnson/magnificent.js\">Magnificent.js on GitHub</a>",
+        "copyright"             : "Magnificent.js Copyright © 2013-2017 <a href=\"https://github.com/AndersDJohnson\">Anders D. Johnson</a>.",
+        "navType"               : "vertical",
+        "theme"                 : "cosmo",
+        "linenums"              : true,
+        "collapseSymbols"       : false,
+        "inverseNav"            : true,
+        "highlightTutorialCode" : true,
+        "protocol": "fred://",
+        "analytics": {
+            "ua": "UA-64799312-1",
+            "domain": "https://andrz.me/magnificent.js"
+        }
+    },
+    "markdown": {
+        "parser"   : "gfm",
+        "hardwrap" : true
+    }
+}

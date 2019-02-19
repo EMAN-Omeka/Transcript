@@ -1,0 +1,47 @@
+/*
+* CSS stylesheet for TEI main file
+* (imports all the required stylefiles)
+*
+* kaarel kaljurand
+* Tue May  6 17:57:42 EEST 2003
+*/
+@import "./font-awesome/css/font-awesome.min.css";
+
+math, math * {
+	border:none;
+}
+.fa {
+
+}
+.inv {
+	display:none;
+}
+.vis {
+	display:inline;
+}
+.souligne {
+	border-bottom:grey 1px dashed;
+}
+.barre {
+	text-decoration: line-through;
+}
+.red {
+	color:red;
+}
+.blue {
+	color:blue;
+}
+
+.handshift {
+}
+expan, orig, note, del, figdesc {
+	padding-right:15px;
+}
+
+.signal {
+ border-bottom:grey 1px dashed;
+}
+
+.replaced {
+  text-decoration: line-through;
+}

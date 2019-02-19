@@ -1,0 +1,8 @@
+// text *{display:inline;border:dashed 3px #f39}text *:active{background-color:teal}tei\.2{display:block} 
+
+text *{display:inline;} tei\.2{display:block}
+
+foreign {
+	border:none;
+	border-bottom:grey 1px dashed;
+}

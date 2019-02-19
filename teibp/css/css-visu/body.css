@@ -1,0 +1,169 @@
+/*
+* CSS stylefile for core elements in TEI body
+* covers only a small set of elements/attributes
+*
+* kaarel kaljurand
+* Mon Apr  8 20:02:25 EET 2002
+*/
+
+/* DISPLAY: BLOCK */
+text, body, div0, div1, div2, div3, div4, div5, div6, div7, p, head, list {
+	display: block; 
+	margin-left: 1em;
+	margin-right: 0;
+	margin-top: 0.2em;
+	margin-bottom: 0.1em;
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	border-left: 1px dotted black;
+	border-right: none;
+	border-top: none;
+	border-bottom: none;
+	white-space: normal;
+	font-family: inherit;
+	color: black;
+}
+
+text {
+	color: black;
+	background-color: white;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* DISPLAY: INLINE */
+hi, rs {
+	display: inline;
+	color: inherit;
+	border-top: none;
+	border-bottom: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+/* DISPLAY: LIST-ITEM */
+item {
+	display: list-item;
+	color: black;
+	list-style-type: disc;
+	/*list-style-position: outside;*/
+	list-style-position: inside;
+	border: none;
+}
+
+div0, div1, div2, div3, div4, div5, div6 {
+	color: black;
+	margin-right: 0.2em;
+}
+
+div0 {
+	border: #330033 solid 2px;
+}
+
+div1 {
+	border: maroon solid 2px;
+}
+
+div2 {
+	border: purple solid 2px;
+}
+
+div3 {
+	border: green solid 2px;
+}
+
+div4 {
+	border: red solid 2px;
+	background-color: silver;
+}
+
+text head {
+	color: black;
+	background-color: transparent;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	border: 1px dotted silver;
+}
+
+div0 head {
+	font-size: 200%;
+	background-color: #330033;
+}
+
+div1 head {
+	font-size: 180%;
+	background-color: maroon;
+}
+
+div2 head {
+	font-size: 160%;
+	background-color: purple;
+}
+
+div3 head {
+	font-size: 140%;
+	background-color: green;
+}
+
+div4 head {
+	font-size: 120%;
+	background-color: red;
+}
+
+list head {
+	font-size: 120%;
+	color: black;
+	background-color: inherit;
+}
+
+
+bibl author { 
+	color: blue;
+	background-color: inherit;
+}
+
+p {
+	margin-top: 1em;
+	padding-left: 0.1em;
+	padding-right: 0.1em;
+	line-height: 1.3em;
+}
+
+hi[rend="bold"] {
+	font-weight: bold;
+}
+
+hi[rend="italic"] {
+	font-style: italic;
+}
+
+rs {
+	color: white;
+	background-color: green;
+}
+
+
+list {
+        background-color: yellow;
+	font-size: 90%;
+}
+
+/**
+be more specific, e.g.:
+gap[desc="photo"]
+(but IE doesn't support it???)
+*/
+
+gap {
+        display: inline;
+	border: 2px outset maroon;
+	background-color: white;
+}
+
+gap:before {
+        display: inline;
+	content: attr(desc);
+}

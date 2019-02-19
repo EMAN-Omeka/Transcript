@@ -1,0 +1,36 @@
+/**
+* some elements, that don't belong to TEI;
+* needed at the moment to be able to view documents
+* that are partly TEI, partly HTML and partly neither TEI nor HTML 
+*
+* kaarel kaljurand
+* 01. 04. 2002. 00:48:46 EEST
+*/
+
+rubriik {
+	display: block;
+	border: solid purple 1px;
+	background-color: orange;
+}
+
+br {
+	display: inline;
+	border: none;
+}
+
+br:before {
+	content: 'br';
+	color: silver;
+	background-color: teal;
+	font-family: Courier, monospace;
+}
+
+tr {
+	display: table-row;
+	border: none;
+}
+
+td {
+	display: table-cell;
+	border: 2px groove silver;
+}

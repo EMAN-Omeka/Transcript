@@ -1,0 +1,15 @@
+/*
+* CSS stylesheet for TEI main file
+* (imports all the required stylefiles)
+*
+* kaarel kaljurand
+* Tue May  6 17:57:42 EEST 2003
+*/
+
+@import "fallback.css";
+@import "header.css";
+@import "body.css";
+@import "tables.css";
+@import "html.css";
+@import "../font-awesome/css/font-awesome.min.css";
+@import "item.css";

@@ -1,0 +1,30 @@
+/*
+* CSS stylesheet for TEI main file
+* (imports all the required stylefiles)
+*
+* kaarel kaljurand
+* Tue May  6 17:57:42 EEST 2003
+*/
+
+math, math * {
+	border:none;
+}
+.fa {
+
+}
+.inv {
+	display:none;
+}
+.souligne {
+	border-bottom:grey 1px dashed;
+}
+.red {
+	color:red;
+}
+.blue {
+	color:purple;
+}
+
+.handshift {
+	color:green;
+}

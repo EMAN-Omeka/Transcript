@@ -1,0 +1,206 @@
+@import "./font-awesome/css/font-awesome.min.css";
+publicationStmt {
+	display:none;
+}
+#popup {
+	font-style:normal;
+  background: #FAFAFA;
+  z-index:10000;
+  position:absolute;
+  margin-top:1.5em;
+  border:#333 1px solid;
+  padding: .5em .5em .5em .5em;
+  border-radius: 15px;  
+  max-width:500px;
+  color:#292929;
+  font-size:18px;
+}
+#popup span {
+	font-style:italic;
+	font-size:1em;
+	clear:right;
+	display:block;
+}
+p.indent * {
+	text-align:left;
+	text-indent:0;
+}
+lb {
+	clear:none;
+}
+ref {
+	border-bottom: #0B610B 1px dashed;
+	cursor:pointer;
+}
+.sup {
+	vertical-align: super;
+}
+.bold {
+	font-weight:900;
+}
+.italic {
+	font-style:italic;
+}
+.underline {
+	text-decoration:underline;	
+}
+.doubleUnderline {
+	text-decoration:underline double;	
+}
+.left {
+	text-align:left;
+}
+.right {
+	text-align:right;
+}
+.center {
+	text-align:center;
+}
+.sub {
+	vertical-align: sub;
+}
+.justify, .indent {
+	text-align:justify;
+	text-indent: 2em;
+}
+.unclear {
+	border-bottom:#2E64FE 1px dashed !important;
+}
+.orange {
+	color:orange;
+}
+.green {
+	color:green;
+}
+.marginLeft {
+	border-bottom: grey 1px dotted;
+}
+
+.marginLeft {
+    background: #fffee8;
+    border: solid 1px #333;
+    border-width: 1px 0;
+    width:150px;
+		left:0;
+		margin-left:-160px;
+		display:block;
+		float:left;
+		text-align:left;		
+		line-height:1em;
+}
+.marginRight {
+    background: #fffee8;
+    border: solid 1px #333;
+    border-width: 1px 0;
+    width:150px;
+		right:0;
+		margin-right:-160px;
+		display:block;
+		float:right;
+		text-align:left;		
+}
+
+del {
+	text-decoration: line-through;
+	padding:0 !important;
+}
+add {
+	vertical-align: baseline !important;
+	font-size:1em !important;
+}
+add:before,
+metamark:before { 
+	content:"["; 
+	color:#FE2E2E; 
+}  
+add:after, 
+metamark:after
+{ 
+	content:"]"; 
+	color:#FE2E2E; 
+}
+add[place=below] {
+	vertical-align:-50% !important;
+}
+add[place=above] {
+	vertical-align:50% !important;
+}
+add[place=top], add[place=bottom] {
+  background: #fffee8;
+  border: solid 1px #333;
+  border-width: 1px 0;
+  width:200px;
+	right:0;
+	display:block;
+	text-align:left;			
+}
+.overtyped {
+	text-decoration:line-through;
+}
+p > * {
+	cursor:pointer;
+}
+
+.transcript-visu {
+  font-size:.7em;
+  color:#aaa;
+  font-style:italic;
+}
+/*
+abbr, add, reg, lem, fig {
+	border-bottom:#333 1px dashed; 	
+}
+abbr, orig {
+	border-bottom:#DF3A01 1px dashed;
+}
+
+.fig::before {
+	content:"(fig.)";
+ font-style:italic;	
+}
+note {
+	font-size:0px;		
+
+  color: transparent;	
+}
+
+note:before {
+	content:"(note)";
+ 	font-style:italic;
+	font-size:14px;		
+  letter-spacing: normal;
+  color: #000;	 	
+}
+.line-break {
+	clear:right;
+}
+handshift::before {
+	content: " (Changement de main) ";
+ 	font-style:italic;		
+}
+sic::before {
+	content: "(sic)";
+ 	font-style:italic;		
+}
+gap::after {
+	content: "(illisible)";
+ 	font-style:italic;		
+ 	color:grey;	
+}
+gap {
+	color:transparent;
+}
+gap > * {
+	color:grey;
+}
+unclear::before {
+	content: "(texte incertain)";
+ 	font-style:italic;			
+}
+item {
+	list-style-type:none;
+}
+speaker {
+	font-weight:bold;
+}
+*/

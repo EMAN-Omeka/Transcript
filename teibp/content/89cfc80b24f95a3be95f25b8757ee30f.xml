@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-stylesheet type="text/xsl" href="teibp.xsl"?>
+<?xml-stylesheet type="text/xsl" href="custom.xsl"?>
+<TEI
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:math="http://www.w3.org/1998/Math/MathML"
+  xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Transcription</title>
+      </titleStmt>
+      <publicationStmt>
+        <pubPlace>Bloomington, IN</pubPlace>
+        <publisher>Digital Culture Lab, School of Library &amp; Information Science, Indiana University</publisher>
+        <availability status="free">
+          <p>Copyright © 2012. TEI Boilerplate</p>
+          <p>
+            <ref n="license" target="http://creativecommons.org/licenses/by/3.0/"><figure style="border-width:0;"><figDesc>Creative Commons License</figDesc><graphic url="http://i.creativecommons.org/l/by/3.0/80x15.png"/></figure></ref><lb />TEI Boilerplate is licensed under a <ref n="license" target="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</ref>.
+          </p>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p>This TEI/XML document is the original source</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <tagsDecl>
+        <!-- Basic text formatting: bold, italic, underline, "normal," etc. -->
+        <rendition xml:id="b" n="tiebp:bold" scheme="css">
+          font-weight:bold;
+        </rendition> 
+        
+        <rendition xml:id="i" n="tiebp:italic" scheme="css">
+          font-style:italic;
+        </rendition> 
+        
+        <rendition xml:id="u" n="tiebp:underline" scheme="css">
+          text-decoration:underline;
+        </rendition> 
+        
+        <rendition xml:id="n" n="teibp:normal" scheme="css">
+          font-weight:normal;
+          text-decoration:none;
+          font-style:normal;
+        </rendition>
+        
+        <rendition xml:id="mono" n="teibp:mono" scheme="css">
+          font-family:Monaco,Courier,monospace;
+        </rendition>
+        
+        <rendition xml:id="super" n="tiebp:super" scheme="css">
+          vertical-align:super;
+          font-size:80%;
+        </rendition>
+        
+        <rendition xml:id="sub" n="tiebp:sub" scheme="css">
+          vertical-align:sub;
+          font-size:80%;
+        </rendition>
+        
+        <rendition xml:id="lowercase" n="tiebp:lowercase" scheme="css">
+          text-transform:lowercase;
+        </rendition>
+        
+        <rendition xml:id="uppercase" n="tiebp:uppercase" scheme="css">
+          text-transform:uppercase;
+        </rendition>
+        
+        <rendition xml:id="capitalize" n="tiebp:capitalize" scheme="css">
+          text-transform:capitalize;
+        </rendition>
+        
+        <rendition xml:id="small-caps" n="tiebp:small-caps" scheme="css">
+          font-variant:small-caps;
+        </rendition>
+        
+        <!-- Blocks. -->
+        <rendition xml:id="block" n="tiebp:block" scheme="css">
+          display:block;
+        </rendition> 
+        
+        <rendition xml:id="blockquote" n="tiebp:blockquote" scheme="css">
+          display:block;
+          font-size:90%;
+          margin-left:3em;
+          padding-left:1em;
+          border-left: 1px solid gray;
+          margin-top:.75em;
+          margin-bottom:.75em;
+          padding-top:.75em;
+          padding-bottom:.75em;
+        </rendition>
+        
+        <rendition corresp="#blockquote" n="tiebp:blockquote" scheme="css" scope="before">
+          <!-- This turns off the default generated quotes for block quotes. -->
+          content:"" !important;
+        </rendition>
+        
+        <rendition corresp="#blockquote" n="tiebp:blockquote" scheme="css" scope="after">
+          <!-- This turns off the default generated quotes for block quotes. -->
+          content:"" !important;
+        </rendition>
+        
+        <rendition xml:id="codeblock" n="teibp:codeblock" scheme="css">
+          display: block;
+          font-size: 80%;
+          margin-left: 1em;
+          padding-left: 1em;
+          border-left: 1px solid gray;
+          margin-top: .75em;
+          margin-bottom: .75em;
+          padding-top: .75em;
+          padding-bottom: .75em;
+          font-family:Monaco,Courier,monospace;
+          white-space:pre;
+        </rendition>
+        
+        <!-- Inline -->
+        
+        <rendition xml:id="inline" n="teibp:inline" scheme="css">
+          display:inline;
+        </rendition>
+        
+        <!-- Alignment. -->
+        <rendition xml:id="center" n="tiebp:center" scheme="css">
+          display:block;
+          text-align:center;
+          margin-left:auto;
+          margin-right:auto;
+        </rendition>
+        
+        <rendition xml:id="left" n="teibp:left" scheme="css">
+          text-align:left;
+        </rendition>
+        
+        <rendition xml:id="right" n="teibp:right" scheme="css">
+          text-align:right;
+        </rendition>
+        
+        <rendition xml:id="justify" n="teibp:justify" scheme="css">
+          text-align:justify;
+        </rendition>
+        
+        <rendition xml:id="center-block" n="tiebp:center-block" scheme="css">
+          display:block;
+          margin-left:auto;
+          margin-right:auto;
+        </rendition>
+        
+        <!-- Indentation -->
+        <rendition xml:id="hang" n="teibp:hang" scheme="css">
+          display:block;
+          padding-left:2.5em;
+          text-indent:-2.5em;
+        </rendition>
+        
+        <!-- Indentation for verse lines. Results in a “hanging” indent if
+					the line wraps. -->
+        <rendition xml:id="l-indent-01" n="tiebp:l-indent-01" scheme="css">
+          display:block;
+          padding-left:4em;
+          text-indent:-2em;
+        </rendition>
+        
+        <rendition xml:id="l-indent-02" n="tiebp:l-indent-02" scheme="css">
+          display:block;
+          padding-left:6em;
+          text-indent:-2em;
+        </rendition>
+        
+        <rendition xml:id="l-indent-03" n="tiebp:l-indent-03" scheme="css">
+          display:block;
+          padding-left:8em;
+          text-indent:-2em;
+        </rendition>
+        
+        <rendition xml:id="l-indent-04" n="tiebp:l-indent-04" scheme="css">
+          display:block;
+          padding-left:10em;
+          text-indent:-2em;
+        </rendition>
+        
+        <rendition xml:id="l-indent-05" n="tiebp:l-indent-05" scheme="css">
+          display:block;
+          padding-left:12em;
+          text-indent:-2em;
+        </rendition>
+        
+        <rendition xml:id="l-indent-06" n="tiebp:l-indent-06" scheme="css">
+          display:block;
+          padding-left:14em;
+          text-indent:-2em;
+        </rendition>
+        
+        <rendition xml:id="l-indent-07" n="tiebp:l-indent-07" scheme="css">
+          display:block;
+          padding-left:16em;
+          text-indent:-2em;
+        </rendition>
+        
+        <rendition xml:id="l-indent-08" n="tiebp:l-indent-08" scheme="css">
+          display:block;
+          padding-left:18em;
+          text-indent:-2em;
+        </rendition>
+        
+        <rendition xml:id="indent" n="tiebp:indent" scheme="css" scope="before">
+          /* text-indent:4em; */
+          /* The above method of describing an indentation for, say, a paragraph is preferred.
+          The method being used is in response to a bug in some browsers whereby a block
+          element, like a paragraph, is erroneously re-indented after interruption by another 
+          block element (like a list, which is valid inside a paragraph). */
+          content:"\A0\A0\A0\A0\A0\A0";
+        </rendition>
+        
+        <!-- font sizes -->
+        
+        <rendition xml:id="small" n="tiebp:small" scheme="css">
+          font-size:90%;
+        </rendition>
+        
+        <rendition xml:id="x-small" n="tiebp:x-small" scheme="css">
+          font-size:85%;
+        </rendition>
+        
+        <rendition xml:id="xx-small" n="tiebp:xx-small" scheme="css">
+          font-size:80%;
+        </rendition>
+        
+        <rendition xml:id="large" n="tiebp:large" scheme="css">
+          font-size:110%;
+        </rendition>
+        
+        <rendition xml:id="x-large" n="tiebp:x-large" scheme="css">
+          font-size:115%;
+        </rendition>
+        
+        <rendition xml:id="xxx-large" n="tiebp:xxx-large" scheme="css">
+          font-size:120%;
+        </rendition>
+        
+        <rendition xml:id="bracket" n="teibp:bracket" scheme="css"/>
+        
+        <rendition corresp="#bracket" n="tiebp:bracket" scheme="css" scope="before">
+          content:"&lt;";
+        </rendition>
+        
+        <rendition corresp="#bracket" n="tiebp:bracket" scheme="css" scope="after">
+          content:">";
+        </rendition>
+        
+      </tagsDecl>
+    </encodingDesc>
+  </teiHeader>
+  <text>
+    <body><div><head class="left headd" title="Titre" rend="left"><i class="fa fa-fw fa-header fa-border green inv" title="Titre"> </i> Text pour HEAD left</head> <head class="right headd" title="Titre" rend="right"><i class="fa fa-fw fa-header fa-border green inv" title="Titre"> </i> Text pour HEAD right</head> <head class="center headd" title="Titre" rend="center"><i class="fa fa-fw fa-header fa-border green inv" title="Titre"> </i> Text pour HEAD center</head></div>
+<div>
+<p class="left p" title="Paragraphe" rend="left"><i class="fa fa-fw fa-paragraph fa-border green inv" title="Paragraphe"> </i> Sed ut <choice class="undefined choice" title="Choix"><i class="fa fa-fw fa-check-circle fa-border green inv" title="Choix"> </i> <abbr class="undefined abbr" title="Abbréviation"><i class="fa fa-fw fa-tag fa-border green inv" title="Abbréviation"> </i> perspiciatis</abbr> <expan class="undefined expan" title="Forme étendue"><i class="fa fa-fw fa-tag fa-border green inv" title="Forme étendue"> </i> unde</expan> omnis</choice> iste natus error sit voluptatem <choice class="undefined choice" title="Choix"><i class="fa fa-fw fa-check-circle fa-border green inv" title="Choix"> </i> <reg class="undefined reg" title="Normalisation"><i class="fa fa-fw fa-tag fa-border green inv" title="Normalisation"> </i> accusantium</reg> <orig class="undefined orig" title="Terme original"><i class="fa fa-fw fa-tag fa-border green inv" title="Terme original"> </i> doloremque</orig> laudantium</choice>, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim <app class="undefined app" title="Entrée apparat critique"><i class="fa fa-fw fa-tag fa-border green inv" title="Entrée apparat critique"> </i> <lem class="undefined lem" title="Lemme"><i class="fa fa-fw fa-exchange fa-border green inv" title="Lemme"> </i> ipsam</lem> <note class="criticalApparatus note" title="Note" type="criticalApparatus"><i class="fa fa-fw fa-tag fa-border green inv" title="Note"> </i> voluptatem</note> quia voluptas </app>sit <subst class="undefined subst" title="Substitution"><i class="fa fa-fw fa-check-circle fa-border green inv" title="Substitution"> </i> aspernatur <del class="overtyped del" title="Suppression" rend="overtyped"><i class="fa fa-fw fa-pencil fa-border green inv" title="Suppression"> </i> aut</del> <add class="marginRight add" title="Note en marge" place="marginRight"><i class="fa fa-fw fa-paperclip fa-border green inv" title="Note en marge"> </i> odit</add> aut </subst>fugit, sed quia consequuntur magni <fig class="right fig" title="Schéma" place="right"><i class="fa fa-fw fa-area-chart fa-border green inv" title="Schéma"> </i> <figdesc>Description de la figure</figdesc></fig>dolores eos qui ratione voluptatem sequi nesciunt. <lb class="no lb" title="Saut de ligne" break="no"><i class="fa fa-fw fa-caret-square-o-down fa-border green inv" title="Saut de ligne"> </i> </lb>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+<p class="left p" title="left" rend="left"><i class="fa fa-fw fa-paragraph fa-border green  inv" title="Paragraphe"> </i> On voit que l'intr<fig class="right fig" title="Schéma" place="right"><i class="fa fa-fw fa-area-chart fa-border green inv" title="Schéma"> </i> <figdesc>Description de la figure</figdesc></fig>oduction <handshift class="ink handShift" title="ink" medium="ink" scribe="Vincent"><i class="fa fa-fw fa-pencil-square-o fa-border green inv" title="undefined"> </i> </handshift>du noyau de fer doux<foreign class="grc foreign" title="grc" xml:lang="grc"><i class="fa fa-fw fa-language fa-border green inv" title="undefined"> </i> </foreign> dans <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>la bobine a pour effet de multiplier l'induction par <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>le facteur µ. Cela montre aussi que µ est bien la <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>perméabilité magnétique.</p>
+<p class="left p" title="left" rend="left"><hi class="underline hi" title="Mis en valeur" rend="underline"><i class="fa fa-fw fa-lightbulb-o fa-border green inv" title="Mis en valeur"> </i> Supposons</hi> la <hi class="doubleUnderline hi" title="Mis en valeur" rend="doubleUnderline"><i class="fa fa-fw fa-lightbulb-o fa-border green inv" title="Mis en valeur"> </i> bobine</hi> <unclear class="medium unclear" title="Incertitude sur la lecture" cert="medium"><i class="fa fa-fw fa-eraser fa-border green inv" title="Incertitude sur la lecture"> </i> noyée</unclear> dans le fer doux : il n'y a <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>rien de changé, son flux de force est toujours multiplié <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>par µ : de même qu'en <unclear class="undefined unclear" title="Incertitude sur la lecture"><i class="fa fa-fw fa-eraser fa-border green inv" title="Incertitude sur la lecture"> </i> Electrostatique</unclear>, <note class="criticalApparatus note" title="Note" type="criticalApparatus"><i class="fa fa-fw fa-tag fa-border green inv" title="Note"> </i> quand</note> on remplace <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>le vide isolant par un diélectrique, le flux de force se <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>trouve multiplié par la <ref class="Sophocle ref" title="Référence (lien)" target="Sophocle"><i class="fa fa-fw fa-link fa-border green inv" title="Référence (lien)"> </i> constante</ref> diélectrique.</p>
+<p class="left p" title="left" rend="left">Au lieu d'un barreau droit, prenons maintenant <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>un tore de fer doux entouré d'une bobine continue : <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>quand on lance le courant dans la bobine, on crée un <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>flux de force µFS qui traverse une boucle fermée d'aire <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>S entourant la bobine. <note class="Note note" title="Note"><i class="fa fa-fw fa-tag fa-border green inv" title="Note"> </i> Note en info bulle.</note> Dans ce cas, on sait qu'il n'y a <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>pas d'action démagnétisante (p.322). On peut ainsi <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>mesurer la perméabilité magnétique µ : c'est la méthode <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>la plus correcte. Connaissant µ, on peut calculer k.</p>
+<p class="center" rend="center">Propriétés magnétiques du fer.</p>
+<p class="left p" title="left" rend="left"><i class="fa fa-fw fa-paragraph fa-border green  inv" title="Paragraphe"> </i> Le coefficient d'aimantation du fer, au lieu d'être constant <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>comme pour les corps peu magnétiques, est variable avec <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>la grandeur des la forces d'aimantation. Un barreau de fer <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>vierge que l'on soumet à une force magnétisante croissante <lb class="yes lb" title="yes" break="yes"><i class="fa fa-fw fa-caret-square-o-down fa-border green  inv" title="Saut de ligne"> </i> </lb>commence à s'aimanter très peu, puis, pour <del class="overtyped del" title="overtyped" rend="overtyped"><i class="fa fa-fw fa-pencil fa-border green  inv" title="Suppression"> </i> une</del> <add class="top add" title="top" place="top"><i class="fa fa-fw fa-paperclip fa-border green  inv" title="Ajout"> </i> des</add> forces</p>
+</div><div id='popup'></div>
+    </body>
+  </text>
+</TEI>

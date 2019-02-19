@@ -1,0 +1,42 @@
+/*
+* TEI tables
+* kaarel kaljurand
+* Mon Apr  8 20:02:05 EET 2002
+*/
+
+/*
+* Note: as far as I know CSS2 can't be used to
+* relevantly visualize rowspan and columnspan
+* properties of a table cell. For that a more powerful
+* mechanism has to be used: e.g. transform TEI tables
+* into HTML tables (this is in case you want to
+* use a conventional webbrowser to view the document)
+*/
+
+/* DISPLAY: TABLE */
+table {
+        display: table;
+	border-left: 1px dotted black;
+	border-right: none;
+	border-top: none;
+	border-bottom: none;
+	margin-left: 1em;
+	margin-right: 0;
+	margin-top: 0.2em;
+	margin-bottom: 0.1em;
+        background-color: yellow;
+}
+
+/* DISPLAY: TABLE-ROW */
+row {
+        display: table-row;
+}
+
+
+/* DISPLAY: TABLE-CELL */
+cell {
+        display: table-cell;
+	background-color: orange;
+        border: 2px groove yellow;
+        padding: 0.1em 0.1em 0.1em 0.1em;
+}

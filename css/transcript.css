@@ -1,0 +1,91 @@
+  #transcript-zoom {
+    position:relative;        
+    float:left;
+    clear:left;
+    width:48%;
+    height:692px;        
+    overflow:hidden !important;
+/*         overflow : scroll; */
+  }
+  .transcription-view  #transcript-zoom {
+    position:relative;        
+    float:left;
+    clear:left;
+    width:48%;
+/*     height:1024px;         */
+    overflow:hidden !important;
+  }
+  #transcript-image {
+    width:100%;
+    position:absolute;
+    top:0px;
+    left:0px;
+    clear:both;
+    display: block;
+  }
+  #transcript-controles {
+    clear:both;
+    display: block;
+    position:absolute;
+    bottom:10px;
+    left:40px;
+  }
+  
+	#transcript-form {
+		width:49%;
+		float:right;
+		clear:right;
+	}
+	#transcript-form input#submit {
+		color:#000;
+		border:black 1px solid;
+		float:right;
+	}
+	#transcript-source {
+		margin-left:54%;
+		float:right;
+		width:400px;;
+		position:absolute;
+		border:grey 1px solid;
+	}
+	#transcript-source xmp {
+/* 		 word-wrap: break-word;			 */
+/* 		 display:block; */
+/* 		 width:100%; */
+/* 		 height:100%; */
+		white-space: pre-wrap;
+	}
+	#transcript-teibp {
+		width:100%;
+		clear:both;	
+	}	
+	#transcript-teibp iframe {
+	width:100%;
+	}
+.invisible {
+	display:none;
+}
+#transcription-full {
+  min-height:500px;
+}
+#trancript-rendered  {
+  clear:both;
+}
+#trancript-rendered iframe {
+	width:100%;
+	clear:both;
+	overflow:visible;
+}
+#transcript-exports li {
+  list-style: none;
+  float:right;
+  padding:0 5px;
+}
+#transcript-optionsfile {
+  float:left;
+}
+#transcript-reset-options,
+#transcript-import-options,
+#transcript-export-options {
+  margin-left: 1em !important;
+}

@@ -1,0 +1,60 @@
+.fa {
+	cursor:pointer;
+}
+:not(div):not(p)  {
+	border-bottom:grey 1px dotted;
+}
+
+/*
+.lb {
+	display:block;
+	cursor:pointer;
+	clear:right;
+}
+.gloss {
+}
+.hi {
+}
+.abbr {
+}
+.lb {
+}
+.sub {
+	text-decoration: line-through;
+	padding-bottom: -1em;
+	margin-bottom: -1em;	
+}
+*/
+.bold {
+	font-weight:900;
+}
+.italic {
+	font-style:italic;
+}
+.underline {
+	text-decoration:underline;	
+}
+.left {
+	text-align:left;
+}
+.right {
+	text-align:right;
+}
+.center {
+	text-align:center;
+}
+.justify, .indent {
+	text-align:justify;
+}
+.orange {
+	color:orange;
+}
+.green {
+	color:green;
+}
+tei {
+	counter-reset: noteNum;
+}
+.marginLeft {
+	border-bottom: grey 1px dotted;
+}
