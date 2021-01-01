@@ -90,7 +90,7 @@ $(document).ready(function() {
 			poptext = $(this).parent().find('reg').text();
 		} else if ($(this).get(0).tagName == 'abbr') {
   		poptext = $(this).parent().find('expan').text();
-		} else if ($.inArray($(this).get(0).tagName, ['label', 'title', 'input'])) {
+		} else if ($.inArray($(this).get(0).tagName, ['label', 'title', 'input']) != -1) {
 			poptext = $(this).parent().find('del, gap, orig').text();
 		}
     if (poptext.trim() != "") {

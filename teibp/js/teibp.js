@@ -65,6 +65,7 @@ $(document).ready(function() {
 	$("i").hide().addClass('inv');
 	$(".fig i, .ref i").addClass('vis');
 	// Affichage de la version riche.
+/*
 	$('#showMarkup').click(function() {
 		if ($(this).prop('checked')) {
 			$(".lb i, .handShift i, abbr, orig").addClass('vis');
@@ -74,6 +75,7 @@ $(document).ready(function() {
 			$("expan, reg").removeClass('inv');
 		}
 	});
+*/
 //	$('#showMarkup').click(function() {
 //		if ($(this).prop('checked')) {
 //			$('.fa').removeClass('inv');						

@@ -5,96 +5,106 @@
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>/plugins/Transcript/javascripts/magnificent/src/theme/default.css" />
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>/plugins/Transcript/css/transcript.css">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
->
-<script type="text/javascript" charset="utf-8" src=<?php echo WEB_ROOT ?>/plugins/Transcript/javascripts/transcript.js ></script> 
-<script type="text/javascript" charset="utf-8" src=<?php echo WEB_ROOT ?>/plugins/Transcript/javascripts/visualisation.js ></script> 
+<!-- <script type="text/javascript" charset="utf-8" src=<?php echo WEB_ROOT ?>/plugins/Transcript/javascripts/transcript.js ></script> -->
+<script type="text/javascript" charset="utf-8" src=<?php echo WEB_ROOT ?>/plugins/Transcript/javascripts/visualisation.js ></script>
 <script src="<?php echo WEB_ROOT; ?>/plugins/Transcript/javascripts/magnificent/jquery.bridget.js"></script>
 <script src="<?php echo WEB_ROOT; ?>/plugins/Transcript/javascripts/magnificent/src/js/mag.js"></script>
 <script src="<?php echo WEB_ROOT; ?>/plugins/Transcript/javascripts/magnificent/src/js/mag-jquery.js"></script>
 <script src="<?php echo WEB_ROOT; ?>/plugins/Transcript/javascripts/magnificent/src/js/mag-control.js"></script>
 
+<?php if ($private == 1) : ?>
+Cette notice est privée.<br /><br />
+Veuillez vous connecter depuis <a href='<?php echo WEB_ROOT; ?>/admin/users/login'>cette page</a> pour y accéder.
+<?php else : ?>
+
 <script>
 // Transcript preferences
-
-<?php echo "var transcript_options = ". json_encode($options) . ";\n";?> 
-<?php echo "var visu = ". json_encode($visu) . ";\n";?> 
-<?php echo "var ilvl = ". json_encode($ilvl) . ";\n";?> 
-<?php echo "var clvl = ". json_encode($clvl) . ";\n";?> 
-<?php echo "var french_names = ". json_encode($french_names) . ";\n";?> 
-<?php echo "var tag_context = ". $controles . ";\n";?>   
+<?php echo "var transcript_options = ". json_encode($options) . ";\n";?>
+<?php echo "var visu = ". json_encode($visu) . ";\n";?>
+<?php echo "var ilvl = ". json_encode($ilvl) . ";\n";?>
+<?php echo "var clvl = ". json_encode($clvl) . ";\n";?>
+<?php echo "var french_names = ". json_encode($french_names) . ";\n";?>
+<?php echo "var tag_context = ". $controles . ";\n";?>
 </script>
 <script>
-$(document).ready(function() {      
+$(document).ready(function() {
   var w;
   $("#transcript-reset").click(function () {
     $("#transcript-image").css('width', '100%');
     $("#transcript-image").css('top', '0');
-    $("#transcript-image").css('left', '0'); 
+    $("#transcript-image").css('left', '0');
   });
   $("#transcript-z-moins").click(function () {
     w = parseInt($("#transcript-image").width());
-    w = parseInt(w / 100) * 90;     
+    w = parseInt(w / 100) * 90;
     $("#transcript-image").width(w);
-  }); 
+  });
   $("#transcript-z-plus").click(function () {
     w = parseInt($("#transcript-image").width());
     w = parseInt(w / 100 * 110);
     $("#transcript-image").width(w);
-  });   
+  });
   $("#transcript-z-gauche").click(function () {
     l = parseInt($("#transcript-image").css('left'));
-    w = parseInt($("#transcript-image").width());    
+    w = parseInt($("#transcript-image").width());
     $("#transcript-image").css('left', l - (w / 100 * 10));
-  }); 
+  });
   $("#transcript-z-droite").click(function () {
     l = parseInt($("#transcript-image").css('left'));
-    w = parseInt($("#transcript-image").width());    
+    w = parseInt($("#transcript-image").width());
     $("#transcript-image").css('left', l + (w / 100 * 10));
-  }); 
+  });
   $("#transcript-z-haut").click(function () {
     t = parseInt($("#transcript-image").css('top'));
-    h = parseInt($("#transcript-image").height());    
+    h = parseInt($("#transcript-image").height());
     $("#transcript-image").css('top', t - (h / 100 * 10));
-  }); 
+  });
   $("#transcript-z-bas").click(function () {
     t = parseInt($("#transcript-image").css('top'));
-    h = parseInt($("#transcript-image").height());    
+    h = parseInt($("#transcript-image").height());
     $("#transcript-image").css('top', t + (h / 100 * 10));
-  }); 
+  });
   $("#transcript-fullscreen").click(function () {
     l = $(window).width();
-    h = $(window).height();    
+    h = $(window).height();
 
     if (fullscreen == true) {
-      $("#content").css(contentDivStyles);     
-      fullscreen = false;      
+      $("#content").css(contentDivStyles);
+      fullscreen = false;
     } else {
       $('#content').css({
         "width": $(document).width(),
         "max-width": $(document).width(),
         "height": $(document).height(),
         "top": 0,
-        "left": 0,   
+        "left": 0,
         "margin": 0,
-        "padding":0   
+        "padding":0
         }
-      );      
+      );
       fullscreen = true;
     }
-    
-  });  
+
+  });
 });
 </script>
+
+
 <style>
+.transcription-view #content {
+  max-width:100%;
+  padding:0;
+}
 #overlay {
 	width:99.9%;
- 	position:absolute; 
+/*  	position:absolute; */
 /* 	min-height:2000px; */
-	top:40px;
+	top:200px;
 	left:0;
-	background:#eee;
+	background:#eee !important;
 	z-index:10000000;
 	border:#111 1px solid;
+	clear:both;
 }
 #overlay-close {
 	position:absolute;
@@ -105,13 +115,13 @@ $(document).ready(function() {
 	position:relative;
 	width:49.5%;
 	border:#222 1px solid;
-	top:10px;
+	top:0px;
 	overflow:visible;
 	display:block;
 	margin-bottom:50px;
 }
 #left {
-	margin-left:5px;	
+	margin-left:5px;
 	clear:left;
 	float:left;
 }
@@ -134,10 +144,9 @@ footer {
   clear:both;
 }
 </style>
-
 <div id="overlay">
-  <span style='clear:both;display:block;'>Transcription (<a href='<?php echo WEB_ROOT . "/files/show/" . $fileId; ?>'>Voir la notice de ce fichier</a>)</span>
-  
+  <h1><span style='clear:both;display:block;'>Transcription (<a href='<?php echo WEB_ROOT . "/files/show/" . $fileId; ?>'>Voir la notice de ce fichier</a>)</span></h1>
+
 <!--	<div id="left"><img src="<?php echo WEB_ROOT ?>/files/original/<?php echo $filename; ?>" /></div> -->
 <div id='transcript-zoom'>
   <?php echo $fullSize; ?>
@@ -148,16 +157,19 @@ footer {
     <button id="transcript-z-bas"><i class="fa fa-arrow-down"></i></button>
     <button id="transcript-z-gauche"><i class="fa fa-arrow-left"></i></button>
     <button id="transcript-z-droite"><i class="fa fa-arrow-right"></i></button>
-    <button id="transcript-reset" title="Afficher l'image entière"><i class="fa fa-square-o"></i></button>    
+    <button id="transcript-reset" title="Afficher l'image entière"><i class="fa fa-square-o"></i></button>
 <!--    <button id="transcript-fullscreen" title="Mode plein écran"><i class="fa fa-arrows"></i></button>     -->
-  </div> 
+  </div>
 </div>
 	<div id="right"><iframe id="transcription-full" src='<?php echo WEB_ROOT . '/teibp/transcriptions/' . $xmlFileName ?>' frameborder="0" scrolling="no" onload="resizeIframe(this)" ></iframe></div>
-	<div style="position:relative;margin-left:20%;clear:both;">
-		<h3><em>Affichage optimisé pour Firefox. Les expressions MathML seront mal rendues sous les autres navigateurs.</em></h3>
-<?php echo foot(); ?>	  		
-	</div>	
+	<div style="position:relative;clear:both;width:100%;text-align:center;">
+  	<?php if (strstr('CoursENS', WEB_ROOT)) : ?>
+		  <h3 style='float:left;clear:none;width:80%;'><em>Affichage optimisé pour Firefox. Les expressions MathML seront mal rendues sous les autres navigateurs.</em></h3>
+		<?php endif; ?>
+    <div><a href='<?php echo WEB_ROOT; ?>/admin/transcript/exporttei/<?php echo $fileId ?>'>Export de la transcription en XML TEI</a></div>
+  </div>
 
+<?php echo $pager; ?>
 </div>
 <script>
   function resizeIframe(obj) {
@@ -165,3 +177,6 @@ footer {
 }
 </script>
 <div id="phpWebRoot" style="display:none;"><?php echo WEB_ROOT; ?></div>
+<?php endif; ?>
+
+<?php echo foot(); ?>
