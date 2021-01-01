@@ -3,7 +3,7 @@ TEI transcription for Omeka Classic content
 
 # Installation
 
-Une fois le dépôt Git cloné dans le répertoire "plugins" de votre installation Omeka, copier le répertoire teibp à la racine de l'instance.
+Une fois le [dépôt Git](https://github.com/ENS-ITEM/Transcript/) cloné dans le répertoire "plugins" de votre installation Omeka, copier le répertoire teibp à la racine de l'instance.
 
 Sous Linux :
 
@@ -33,9 +33,9 @@ Une fois la transcription sauvegardée, elle est visible à l'adresse
 
 # Notes
 
-Ce module utilise une version modifiée de TinyMCE 4.
+Ce module utilise une version modifiée de [TinyMCE 4](https://www.tiny.cloud/).
 
-Les tags disponibles sont gérés par un fichier JSON (`javascript/buttons.json`). Il est possible d'en ajouter de nouveaux en respectant scrupuleusement la syntaxe.
+Les tags disponibles sont gérés par un fichier [JSON](https://www.json.org) (`javascript/buttons.json`). Il est possible d'en ajouter de nouveaux en respectant scrupuleusement la syntaxe.
 
 De même, le fichier `javascript/controle.json` gère les contrôles de cohérence : dans quel contexte un tag peut-il être utilisé ? Ceci peut aussi être géré dans l'interface (`admin/transcript/controle`).
 
