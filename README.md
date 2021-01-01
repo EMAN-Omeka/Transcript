@@ -33,7 +33,7 @@ Une fois la transcription sauvegardée, elle est visible à l'adresse
 
 # Notes
 
-Ce module utilise une version modifiée de tinyMCE 4.
+Ce module utilise une version modifiée de TinyMCE 4.
 
 Les tags disponibles sont gérés par un fichier JSON (`javascript/buttons.json`). Il est possible d'en ajouter de nouveaux en respectant scrupuleusement la syntaxe.
 
