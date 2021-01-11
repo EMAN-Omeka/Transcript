@@ -1,26 +1,27 @@
 <?php
 
-/* 
+/*
  * Transcript Plugin
  *
  * Transcription Tool for the Eman project
  *
  */
 
-class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin 
+class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 {
 	/**
 	 * The name of the Transcript element set.
 	 */
 	const ELEMENT_SET_NAME = 'Transcript';
-	
+
   protected $_hooks = array(
   		'public_content_top',
   		'define_routes',
   		'define_acl',
-  		'install'  		
+  		'install',
+  		'admin_files_panel_buttons',
   );
-  
+
   protected $_filters = array(
     'admin_navigation_main',
     'admin_items_form_tabs',
@@ -43,42 +44,47 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
         unset ($tabs['Transcript']);
         return $tabs;
   }
-  
+
+  function hookAdminFilesPanelButtons($args)
+  {
+    echo "<a class='big green button' href='" . WEB_ROOT . "/transcribe/" . $args['record']->id . "'>Transcrire ce fichier</a>";
+  }
+
   function hookPublicContentTop($args)
-  {    
+  {
 		$params = Zend_Controller_Front::getInstance()->getRequest()->getParams();
 
     if (isset($params['action'])) {
-      if ($params['action'] == 'transcribe' || ! isset($params['id'])) : return; endif;      
+      if ($params['action'] == 'transcribe' || ! isset($params['id'])) : return; endif;
     }
     if (isset($params['id'])) {
       $file = get_record_by_id('file', $params['id']);
     }
     // Si le fichier n'est pas public, on ne fait rien.
     if (! isset($file)) : return; endif;
-    
+
   	if ($currentUser = current_user()) {
   		$transcribeLink = "";
   		if ($params['controller'] == 'files' && $params['action'] == 'show' || $params['controller'] == 'eman' && $params['action'] == 'files-show') {
   			if (in_array($currentUser->role, array('super', 'admin', 'author', 'editor', 'researcher'))) {
   				$transcribeLink = WEB_ROOT . "/transcribe/" . $params['id'];
-  				print "<a class='eman-edit-link' style='margin-top:-55px;' href='$transcribeLink'>Transcrire ce fichier</a>";  				
+  				print "<a class='eman-edit-link' style='margin-top:-55px;' href='$transcribeLink'>Transcrire ce fichier</a>";
   			}
   	  }
     }
 
-    // Lien vers la transcription  
-  	if ($params['controller'] == 'files' && $params['action'] == 'show' || $params['controller'] == 'eman' && $params['action'] == 'files-show') {  
-    	$xmlFileName =  substr($file->filename, 0, strpos($file->filename, '.')) . '.xml';           				
+    // Lien vers la transcription
+  	if ($params['controller'] == 'files' && $params['action'] == 'show' || $params['controller'] == 'eman' && $params['action'] == 'files-show') {
+    	$xmlFileName =  substr($file->filename, 0, strpos($file->filename, '.')) . '.xml';
     	if (file_exists(BASE_DIR . '/teibp/transcriptions/' . $xmlFileName)) :
         print "<a class='eman-edit-link' style='margin-top:-30px;' href='" . WEB_ROOT . "/transcription/" . metadata('file', 'id') . "'>Afficher la transcription</a>";
-      endif;	    			
+      endif;
 		}
-	
+
   	return true;
   }
 
-  
+
   function hookDefineRoutes($args)
   {
   	// Don't add these routes on the public side to avoid conflicts.
@@ -87,7 +93,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 		$router->addRoute(
 				'transcript_view',
 				new Zend_Controller_Router_Route(
-						'transcription/:fileid', 
+						'transcription/:fileid',
 						array(
 								'module' => 'transcript',
 								'controller'   => 'page',
@@ -99,7 +105,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 		$router->addRoute(
 				'transcript_transcribe_form',
 				new Zend_Controller_Router_Route(
-						'transcribe/:fileid', 
+						'transcribe/:fileid',
 						array(
 								'module' => 'transcript',
 								'controller'   => 'page',
@@ -119,7 +125,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 								'action'       => 'admin',
 						)
 				)
-		);  		
+		);
 		$router->addRoute(
 				'transcript_admin_controle',
 				new Zend_Controller_Router_Route(
@@ -130,7 +136,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 								'action'       => 'controle',
 						)
 				)
-		);  		
+		);
 		$router->addRoute(
 				'transcript_admin_list',
 				new Zend_Controller_Router_Route(
@@ -141,7 +147,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 								'action'       => 'list',
 						)
 				)
-		);  
+		);
 		// Add exports pages.
 		$router->addRoute(
 				'transcript_export_tei',
@@ -153,7 +159,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 								'action'       => 'exporttei',
 								'fileid'			=> '',  						)
 				)
-		);   
+		);
 		$router->addRoute(
 				'transcript_admin_stats',
 				new Zend_Controller_Router_Route(
@@ -164,7 +170,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 								'action'       => 'stats',
 						)
 				)
-		);    	
+		);
 		$router->addRoute(
 				'transcript_admin_reset',
 				new Zend_Controller_Router_Route(
@@ -175,7 +181,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 								'action'       => 'reset',
 						)
 				)
-		);  							
+		);
 		$router->addRoute(
 				'transcript_admin_export',
 				new Zend_Controller_Router_Route(
@@ -198,7 +204,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 						)
 				)
 		);
-  }  
+  }
 
   /**
    * Add the pages to the public main navigation options.
@@ -215,25 +221,25 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
   	);
   	return $nav;
   }
-  
+
   function hookDefineAcl($args)
   {
   	$acl = $args['acl'];
   	$TranscriptAdmin = new Zend_Acl_Resource('Transcript_Page');
   	$acl->add($TranscriptAdmin);
-//     $acl->allow(array('super', 'admin'), array('Transcript_Page'));   
-    $acl->allow(array('super', 'admin'), 'Transcript_Page', 'admin');   
+//     $acl->allow(array('super', 'admin'), array('Transcript_Page'));
+    $acl->allow(array('super', 'admin'), 'Transcript_Page', 'admin');
 
     if (plugin_is_active("More User Roles")) {
-      $users = array('author', 'editor', 'researcher');      
+      $users = array('author', 'editor', 'researcher');
     } else {
       $users = array('researcher');
     }
-    $acl->deny($users, 'Transcript_Page');  
-    $acl->allow($users, 'Transcript_Page', array('list', 'stats', 'transcribe'));  
-    $acl->allow(null, 'Transcript_Page', array('view'));  
+    $acl->deny($users, 'Transcript_Page');
+    $acl->allow($users, 'Transcript_Page', array('list', 'stats', 'transcribe'));
+    $acl->allow(null, 'Transcript_Page', array('view'));
   }
-    
+
   /**
    * Install Transcript.
    */
@@ -246,7 +252,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
   						. 'that element set to install this plugin.', self::ELEMENT_SET_NAME)
   		);
   	}
-  
+
   	$elementSetMetadata = array('name' => self::ELEMENT_SET_NAME);
   	$elements = array(
   			array('name' => 'Transcription',
@@ -264,8 +270,8 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
   	PRIMARY KEY (`id`)
   	) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
   	$db->query($sql);
-  	 
-  	$this->_installOptions();  	
-  }  
+
+  	$this->_installOptions();
+  }
 
 }
