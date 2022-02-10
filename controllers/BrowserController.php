@@ -9,7 +9,7 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
     $this->transcriptionTermId = $db->query("SELECT id FROM `$db->Elements` WHERE name ='Transcription' AND description = 'A TEI tagged representation of the document.'")->fetchObject()->id;
     $this->user = new StdClass;
     $user = current_user();
-    $user ? $this->user = $user : $this->user = 'public';
+    $user ? $this->user = $user : $this->user->role = 'public';
   }
 
 	private function getForm($file = null)
@@ -665,7 +665,7 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
       if ($this->user <> 'public') {
         $resp = "Les termes ne peuvent pas être extraits.<br />Le code de la transcription n'est pas valide, veuillez le vérifier.";
       } else {
-        $resp = "Les termes ne peuvent pas être extraits.";
+        $resp = "Il n'y a pas de termes indexés dans cette transcription.";
       }
       return ["<h3>Liste des termes indexés dans cette transcription</h3>" . $resp];
     }
