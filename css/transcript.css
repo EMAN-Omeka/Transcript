@@ -1,75 +1,102 @@
-  #transcript-zoom {
-    position:relative;        
-    float:left;
-    clear:left;
-    width:48%;
-    height:692px;        
-    overflow:hidden !important;
-/*         overflow : scroll; */
-  }
-  .transcription-view  #transcript-zoom {
-    position:relative;        
-    float:left;
-    clear:left;
-    width:48%;
-/*     height:1024px;         */
-    overflow:hidden !important;
-  }
-  #transcript-image {
-    width:100%;
-    position:absolute;
-    top:0px;
-    left:0px;
-    clear:both;
-    display: block;
-  }
-  #transcript-controles {
-    clear:both;
-    display: block;
-    position:absolute;
-    bottom:10px;
-    left:40px;
-  }
-  
-	#transcript-form {
-		width:49%;
-		float:right;
-		clear:right;
-	}
-	#transcript-form input#submit {
-		color:#000;
-		border:black 1px solid;
-		float:right;
-	}
-	#transcript-source {
-		margin-left:54%;
-		float:right;
-		width:400px;;
-		position:absolute;
-		border:grey 1px solid;
-	}
-	#transcript-source xmp {
-/* 		 word-wrap: break-word;			 */
-/* 		 display:block; */
-/* 		 width:100%; */
-/* 		 height:100%; */
-		white-space: pre-wrap;
-	}
-	#transcript-teibp {
-		width:100%;
-		clear:both;	
-	}	
-	#transcript-teibp iframe {
+#TranscriptionForm {
+  clear:both;
+}
+#files-gallery {
+  clear:both;
+}
+#transcript-zoom {
+  position:relative;
+  float:left;
+  clear:left;
+  width:48%;
+  margin-top:109px;
+  scroll-behaviour:smooth;
+}
+#transcript-image-container  {
+  height:700px;
+  vertical-align: top;
+  overflow-y: scroll;
+  overflow-x: none;
+  scrollbar-color: #ddd transparent;
+  scrollbar-width: auto;
+}
+.transcript-image {
+  clear:both;
+  display: block;
+  margin-bottom:2em;
+  overflow:hidden;
+  max-width:100%;
+}
+#transcript-controles {
+  clear:both;
+  display: block;
+  position:absolute;
+  bottom:10px;
+  left:40px;
+}
+
+#transcript-form {
+	width:49%;
+	float:right;
+	clear:right;
+	overflow:visible;
+}
+#transcript-form input#submit {
+	color:#000;
+	border:black 1px solid;
+	float:right;
+}
+#transcript-source {
+	margin-left:54%;
+	float:right;
+	width:400px;;
+	position:absolute;
+	border:grey 1px solid;
+}
+#transcript-source xmp {
+	white-space: pre-wrap;
+}
+#transcript-teibp {
 	width:100%;
-	}
+	clear:both;
+}
+#transcript-teibp iframe {
+width:100%;
+}
 .invisible {
 	display:none;
 }
 #transcription-full {
   min-height:500px;
 }
-#trancript-rendered  {
+#trancript-rendered {
   clear:both;
+}
+#transcript-rendition {
+  width:100%;
+}
+#transcript-rendition #trancript-rendered,
+#transcript-rendition #trancript-pictures {
+  width:48%;
+  margin:0;
+  padding:0;
+  float:left;
+  clear:none;
+  display:block;
+  overflow:visible;
+}
+#trancript-rendered {
+  margin-left:1% !important;
+}
+#trancript-pictures img {
+  width:100%;
+}
+#trancript-pictures {
+  width:48% !important;
+  overflow-x: scroll !important;
+  overflow-y: scroll !important;
+  scrollbar-color: #ddd transparent;
+  scrollbar-width: thin;
 }
 #trancript-rendered iframe {
 	width:100%;
@@ -88,4 +115,187 @@
 #transcript-import-options,
 #transcript-export-options {
   margin-left: 1em !important;
+}
+
+/* Codemirror */
+
+#code-mirror-wrapper {
+  overflow: visible;
+  clear: both;
+  display: none;
+  width:100%;
+  margin:20px 0;
+  font-size:12px !important;
+}
+#validation-response {
+  margin: 1em 0;
+  padding-left: 2em;
+  display:block;
+  clear:both;
+}
+#transcript-show-source,
+#transcript-validate {
+  display: none;
+}
+.transcript-xml-errors li {
+  list-style-type: disc;
+  display: block;
+  border-radius: 4px;
+  background: transparent;
+  color:#eee;
+  padding-left: 2em;
+  margin-bottom: .5em;
+}
+.transcript-xml-errors .level-1 {
+  background-color: hsl(0, 100%, 75%);
+}
+.transcript-xml-errors .level-2 {
+  background-color: hsl(0, 100%, 50%);
+}
+.transcript-xml-errors .level-3 {
+  background-color: hsl(0, 100%, 25%);
+}
+
+.t {
+color: #4954d0
+}
+.red {
+  background-color:hsl(0, 100%, 25%);
+}
+a.sub-file {
+  font-size:.7em;
+}
+#toolbar {
+  clear: both;
+}
+form.public {
+  display:none;
+}
+#ToolbarForm label {
+  width:70px;
+  display: block;
+  clear:none;
+  float:left;
+  text-align:right;
+  margin-right:1em;
+}
+#transcript-teibp-title {
+  text-align:center;
+  font-weight:bold;
+  clear:both;
+}
+
+#transcript-mapping {
+  border:grey 1px solid;
+  padding:5px;
+  font-weight:bold;
+}
+#transcript-mapping td.header {
+  text-align:center;
+  border:grey 1px solid;
+}
+#transcript-mapping td.row {
+  padding:3px;
+  border-bottom:grey 1px solid;
+}
+#transcript-mapping td.right {
+  border-left:grey 1px solid;
+}
+#transcript-mapping select.dest {
+  height:1em;
+  margin:0;
+}
+#transcript-mapping #messages {
+  text-align:right;
+}
+#transcript-mapping #xml-file-path {
+  display:none;
+}
+.footnotes {
+  margin-top:2em;
+}
+dt.fn-number {
+  padding-right:.5em;
+}
+#currenttag {
+  font-size:1em;
+  font-weight:lighter;
+  z-index:100;
+  color:#000;
+  float:right;
+  clear:right;
+  display: block;
+  height:1em;
+}
+.transcript-list-terms li {
+  list-style-image: none;
+  list-style-type: none;
+}
+.buttons-nav {
+  width:20px;
+  float:right;
+  clear:right;
+  margin-right:10px;
+}
+.open-help {
+  background:none;
+  background-color: #111;
+  color: #eee;
+}
+.click-zoom input[type=checkbox] {
+  display: none
+}
+
+.click-zoom img {
+  width:1000px
+  margin: 200px;
+  transition: transform 0.25s ease;
+  cursor: zoom-in;
+}
+
+.click-zoom input[type=checkbox]:checked~img {
+  transform: scale(3);
+  cursor: zoom-out;
+}
+
+#file-info, #termes-info {
+  clear:both;
+  padding: 0 1em 2em;
+}
+#termes-info {
+  padding: 0 1em 1em;
+  border-bottom: grey 1px solid;
+  margin-bottom: 2em;
+}
+#transcript-list td {
+  vertical-align: middle;
+}
+.highlight {
+  border: #555 1px solid;
+  border-radius: 4px;
+  box-shadow:  0 0 10px 5px rgba(0,0,0,0.6);
+  -moz-box-shadow: 0 0 10px  5px rgba(0,0,0,0.6);
+  -webkit-box-shadow: 0 0 10px 5px rgba(0,0,0,0.6);
+  -o-box-shadow: 0 0 10px 5px rgba(0,0,0,0.6);
+}
+.term table {
+  border:grey 1px solid;
+}
+.term table thead {
+  font-weight:bold;
+  text-align: center;
+}
+.term table tr {
+  border:grey 1px solid;
+}
+.term table td:nth-child(2) {
+  width:150px;
+}
+#messages {
+  clear:both;
+  font-size: 1.2em;
+  color:#bb2222;
+}
+#regroup {
+  display:none;
 }

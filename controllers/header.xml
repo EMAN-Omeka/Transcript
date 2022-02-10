@@ -1,0 +1,23 @@
+<tei:TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:svg="http://www.w3.org/2000/svg" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:math="http://www.w3.org/1998/Math/MathML">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Transcription de test pour développement</title>
+      </titleStmt>
+      <publicationStmt>
+        <publisher>Digital Culture Lab, School of Library &amp; Information Science, Indiana University</publisher>
+        <availability status="free">
+          <p>Copyright © 2012. TEI Boilerplate</p>
+          <p>
+            <ref n="license" target="http://creativecommons.org/licenses/by/3.0/"/>
+                        <lb/>TEI Boilerplate is licensed under a <ref n="license" target="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</ref>.
+          </p>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p>This TEI/XML document is the original source</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>

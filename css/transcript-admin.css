@@ -1,0 +1,44 @@
+body {
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust:none;
+  -ms-text-size-adjust:none;
+}
+#transcript-list {
+  font-size:1em;
+}
+#transcript-list .characters {
+  vertical-align: middle;
+  text-align: center;
+}
+a.sub-file {
+/*   font-family: "Helvetica", sans-serif; */
+/*   font-size:9px !important; */
+  font-size-adjust: 0.38;
+  color:grey;
+}
+#alphabet  {
+  list-style-position: none;
+  width:100%;
+}
+#alphabet li {
+  float:left;
+  clear:none;
+  display:block;
+  width:1em;
+  font-size:1.2em;
+  font-weight: bold;
+}
+.transcript-term-description-label {
+  text-align: center;
+  vertical-align: middle;
+}
+.transcript-term-label {
+  font-weight:bold;
+  font-size: 1.2em;
+}
+/* Doesn't work
+.transcript-term-label::first-letter {
+  text-transform: uppercase;
+  display: inline-block;
+}
+*/

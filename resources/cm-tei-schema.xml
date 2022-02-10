@@ -1,0 +1,703 @@
+<cm_tei_schema>
+  <abbr type=''>
+	  <menuName>annot</menuName>
+	  <ihmName>Abbrévation</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>unclear</children>
+    <children>app</children>
+    <children>title</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </abbr>
+  <add place='top,bottom,margin,marginRight,marginLeft,opposite,overleaf,above,right,below,left,inline,inspace' type='' rend='' rendition='' medium='' source=''>
+    <menuName>annot</menuName>
+	  <ihmName>Ajout</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>choice</children>
+    <children>note</children>
+    <children>date</children>
+    <children>app</children>
+    <children>foreign</children>
+    <children>l</children>
+    <children>lg</children>
+    <children>persName</children>
+    <children>title</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>rdg</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+    <children>formula</children>
+  </add>
+  <app type='' resp='' source=''>
+	  <menuName>annot</menuName>
+	  <ihmName>Note appareil critique</ihmName>
+    <children>note</children>
+    <children>date</children>
+    <children>lem</children>
+    <children>rdg</children>
+    <children>cit</children>
+  </app>
+  <body>
+	  <menuName>struct</menuName>
+	  <ihmName>Body</ihmName>
+		<children>div</children>
+  </body>
+  <cell>
+	  <menuName>struct</menuName>
+	  <ihmName>Cellule de tableau</ihmName>
+    <children>handShift</children>
+    <children>p</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>choice</children>
+    <children>note</children>
+    <children>date</children>
+    <children>app</children>
+    <children>foreign</children>
+    <children>l</children>
+    <children>lg</children>
+    <children>sp</children>
+    <children>persName</children>
+    <children>title</children>
+    <children>ref</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>link</children>
+  </cell>
+  <choice>
+    	  <menuName>annot</menuName>
+    	  <ihmName>Choix</ihmName>
+        <children>abbr</children>
+        <children>expan</children>
+        <children>orig</children>
+        <children>reg</children>
+        <children>seg</children>
+  </choice>
+  <cit type='' ref='' source='' >
+	  <menuName>mef</menuName>
+	  <ihmName>Citation</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>choice</children>
+    <children>note</children>
+    <children>date</children>
+    <children>app</children>
+    <children>foreign</children>
+    <children>persName</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>cit</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>link</children>
+  </cit>
+  <date when='' from='' to='' notBefore='' notAfter=''>
+  	  <menuName>annot</menuName>
+  	  <ihmName>Date</ihmName>
+      <children>seg</children>
+  </date>
+  <del rend='blue,black,purple,red' subtype = 'double,overstrike' type='hand,handPencil,pencil,TypeWriter' source=''>
+	  <menuName>annot</menuName>
+	  <ihmName>Suppression</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>choice</children>
+    <children>note</children>
+    <children>date</children>
+    <children>app</children>
+    <children>foreign</children>
+    <children>l</children>
+    <children>lg</children>
+    <children>persName</children>
+    <children>title</children>
+    <children>seg</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </del>
+  <div xml:id='xx' type='' subtype='' xml:lang='' corresp=''>
+	  <menuName>struct</menuName>
+	  <ihmName>Division de texte</ihmName>
+    <children>div</children>
+    <children>head</children>
+    <children>p</children>
+    <children>lb</children>
+    <children>table</children>
+    <children>list</children>
+    <children>note</children>
+    <children>date</children>
+    <children>figure</children>
+    <children>lg</children>
+    <children>sp</children>
+    <children>signed</children>
+    <children>formula</children>
+    <children>salute</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>link</children>
+    <children>postscript</children>
+    <children>ptr</children>
+  </div>
+  <expan>
+	  <menuName>annot</menuName>
+	  <ihmName>Forme étendue</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>unclear</children>
+    <children>app</children>
+    <children>title</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </expan>
+  <figure place='top,bottom,margin,marginRight,marginLeft,opposite,overleaf,above,right,below,left,inline,inspace' type=''>
+ 	  <menuName>mef</menuName>
+	  <ihmName>Schéma/Figure</ihmName>
+    <children>figdesc</children>
+  </figure>
+  <figdesc>
+	  <menuName>mef</menuName>
+	  <ihmName>Description de schéma/figure</ihmName>
+	  <children></children>
+  </figdesc>
+  <foreign xml:lang=''>
+	  <menuName>mef</menuName>
+	  <ihmName>Changement de langue</ihmName>
+    <children>handShift</children>
+    <children>p</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>choice</children>
+    <children>note</children>
+    <children>date</children>
+    <children>app</children>
+    <children>title</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>link</children>
+  </foreign>
+  <formula rend='' type='' notation='LateX,MathML'>
+	  <menuName>struct</menuName>
+	  <ihmName>Formule mathématique</ihmName>
+    <children></children>
+  </formula>
+  <gap reason=''>
+  	<menuName>annot</menuName>
+  	<ihmName>Omission</ihmName>
+    <children></children>
+  </gap>
+  <handShift medium='' rend='' scribe=''>
+    <menuName>empty</menuName>
+    <ihmName>Changement de main</ihmName>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>choice</children>
+    <children>note</children>
+    <children>date</children>
+    <children>app</children>
+    <children>foreign</children>
+    <children>l</children>
+    <children>lg</children>
+    <children>persName</children>
+    <children>title</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>rdg</children>
+  </handShift>
+  <head type='' rendition=''>
+    <menuName>struct</menuName>
+    <ihmName>Titre</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>choice</children>
+    <children>note</children>
+    <children>date</children>
+    <children>app</children>
+    <children>foreign</children>
+    <children>figure</children>
+    <children>persName</children>
+    <children>title</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </head>
+  <hi rend='bold,doubleUnderline,italic,sup,sub,surrounded,underline' type='' medium=''>
+    <menuName>mef</menuName>
+    <ihmName>Mise en valeur</ihmName>
+    <children>lb</children>
+    <children>add</children>
+    <children>del</children>
+    <children>unclear</children>
+    <children>seg</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>link</children>
+  </hi>
+  <item>
+    <menuName>struct</menuName>
+    <ihmName>Element de liste</ihmName>
+    <children>handShift</children>
+    <children>p</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>choice</children>
+    <children>note</children>
+    <children>date</children>
+    <children>app</children>
+    <children>foreign</children>
+    <children>l</children>
+    <children>lg</children>
+    <children>sp</children>
+    <children>persName</children>
+    <children>title</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </item>
+  <l met='' rhyme='' type=''>
+    <menuName>mef</menuName>
+    <ihmName>Vers</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>choice</children>
+    <children>note</children>
+    <children>date</children>
+    <children>app</children>
+    <children>foreign</children>
+    <children>persName</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </l>
+  <lb type='' break='yes,no'>
+ 	  <menuName>empty</menuName>
+	  <ihmName>Saut de ligne</ihmName>
+    <children></children>
+  </lb>
+  <lem wit='' type='' source='' hand=''>
+    <menuName>annot</menuName>
+    <ihmName>Texte de base</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>choice</children>
+    <children>foreign</children>
+    <children>l</children>
+    <children>persName</children>
+    <children>title</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </lem>
+  <lg met='' rhyme='' type=''>
+    <menuName>mef</menuName>
+    <ihmName>Strophe</ihmName>
+    <children>l</children>
+  </lg>
+  <link>
+	  <menuName>mef</menuName>
+	  <ihmName>Lien hypertexte</ihmName>
+    <children></children>
+  </link>
+  <list type=''>
+    <menuName>mef</menuName>
+    <ihmName>Liste</ihmName>
+    <children>head</children>
+    <children>item</children>
+  </list>
+  <metamark place='top,bottom,margin,marginRight,marginLeft,opposite,overleaf,above,right,below,left,inline,inspace' rendition='' function=''>
+    <menuName>mef</menuName>
+    <ihmName>Signe graphique</ihmName>
+    <children></children>
+  </metamark>
+  <milestone type='' unit=''>
+    <menuName>empty</menuName>
+  	<ihmName>Jalon / Balise frontière</ihmName>
+    <children></children>
+  </milestone>
+<!--
+  <name type='' source=''>
+    <menuName>annot</menuName>
+    <ihmName>Nom propre / Syntagme nominal</ihmName>
+    <children></children>
+  </name>
+-->
+	<note source=''>
+    <menuName>mef</menuName>
+    <ihmName>Note de l'auteur</ihmName>
+    <children>handShift</children>
+    <children>hi</children>
+    <children>foreign</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>cit</children>
+  </note>
+  <orig>
+    <menuName>mef</menuName>
+    <ihmName>Terme original</ihmName>
+    <children>lb</children>
+    <children>hi</children>
+    <children>del</children>
+    <children>seg</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>link</children>
+  </orig>
+  <p xml:id='yy' rendition='right,left,center,indent,justify'>
+    <menuName>struct</menuName>
+    <ihmName>Paragraphe</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>choice</children>
+    <children>table</children>
+    <children>list</children>
+    <children>note</children>
+    <children>date</children>
+    <children>app</children>
+    <children>foreign</children>
+    <children>figure</children>
+    <children>l</children>
+    <children>lg</children>
+    <children>persName</children>
+    <children>title</children>
+    <children>ref</children>
+    <children>math</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+    <children>formula</children>
+    <children>ptr</children>
+    <children>quote</children>
+  </p>
+  <persName ref='' type=''>
+	  <menuName>annot</menuName>
+	  <ihmName>Nom de personne</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>choice</children>
+    <children>ref</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </persName>
+  <placeName ref='' type=''>
+	  <menuName>annot</menuName>
+	  <ihmName>Nom de lieue</ihmName>
+    <children>forename</children>
+    <children>geogName</children>
+    <children>orgName</children>
+    <children>placeName</children>
+    <children>roleName</children>
+    <children>surname</children>
+    <children>span</children>
+  </placeName>
+  <postscript>
+	  <menuName>struct</menuName>
+	  <ihmName>Post Scriptum</ihmName>
+    <children>formula</children>
+  </postscript>
+  <ptr target=''>
+	  <menuName>empty</menuName>
+	  <ihmName>Changement de fichier Omeka</ihmName>
+    <children></children>
+  </ptr>
+  <quote>
+	  <menuName>mef</menuName>
+	  <ihmName>Citation sans référence</ihmName>
+    <children></children>
+  </quote>
+  <rdg hand='' source='' type='' wit='' >
+	  <menuName>annot</menuName>
+	  <ihmName>Variante / Leçon</ihmName>
+    <children>lem</children>
+  </rdg>
+  <ref type='' target=''>
+	  <menuName>annot</menuName>
+	  <ihmName>Référence</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>foreign</children>
+    <children>seg</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </ref>
+  <reg type=''>
+    <menuName>annot</menuName>
+    <ihmName>Forme normalisée</ihmName>
+    <children>lb</children>
+    <children>hi</children>
+    <children>del</children>
+    <children>seg</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>link</children>
+  </reg>
+  <row>
+	  <menuName>mef</menuName>
+	  <ihmName>Ligne de tableau</ihmName>
+    <children>cell</children>
+  </row>
+  <salute>
+	  <menuName>mef</menuName>
+	  <ihmName>Formule de politesse</ihmName>
+    <children></children>
+  </salute>
+  <seg type=''>
+	  <menuName>mef</menuName>
+	  <ihmName>Segment</ihmName>
+    <children></children>
+  </seg>
+  <sic ana=''>
+	  <menuName>annot</menuName>
+	  <ihmName>Erreur de l'auteur</ihmName>
+    <children>lb</children>
+    <children>seg</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>link</children>
+  </sic>
+  <signed>
+	  <menuName>mef</menuName>
+	  <ihmName>Signature</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>note</children>
+    <children>date</children>
+    <children>app</children>
+    <children>foreign</children>
+    <children>persName</children>
+    <children>ref</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </signed>
+  <sp type=''>
+	  <menuName>mef</menuName>
+	  <ihmName>Prise de parole/Tirade</ihmName>
+    <children>p</children>
+    <children>l</children>
+    <children>speaker</children>
+  </sp>
+  <speaker>
+	  <menuName>mef</menuName>
+	  <ihmName>Locuteur/Personnage</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>choice</children>
+    <children>app</children>
+    <children>seg</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </speaker>
+  <subst>
+	  <menuName>annot</menuName>
+	  <ihmName>Substitution</ihmName>
+    <children>add</children>
+    <children>del</children>
+  </subst>
+  <table>
+	  <menuName>mef</menuName>
+	  <ihmName>Table</ihmName>
+    <children>head</children>
+    <children>row</children>
+  </table>
+  <term ref='' type='' n=''>
+  	  <menuName>annot</menuName>
+  	  <ihmName>Terme</ihmName>
+    <children></children>
+  </term>
+  <text>
+  	<children>body</children>
+  </text>
+  <title ref='' type=''>
+	  <menuName>mef</menuName>
+	  <ihmName>Titre oeuvre</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>subst</children>
+    <children>gap</children>
+    <children>unclear</children>
+    <children>sic</children>
+    <children>choice</children>
+    <children>note</children>
+    <children>date</children>
+    <children>foreign</children>
+    <children>persName</children>
+    <children>ref</children>
+    <children>seg</children>
+    <children>placeName</children>
+    <children>name</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </title>
+  <unclear cert='high,medium,low' reason=''>
+	  <menuName>mef</menuName>
+	  <ihmName>Pas clair</ihmName>
+    <children>handShift</children>
+    <children>lb</children>
+    <children>hi</children>
+    <children>add</children>
+    <children>del</children>
+    <children>gap</children>
+    <children>app</children>
+    <children>seg</children>
+    <children>metamark</children>
+    <children>milestone</children>
+    <children>cit</children>
+    <children>link</children>
+  </unclear>
+</cm_tei_schema>

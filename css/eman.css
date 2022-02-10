@@ -1,38 +1,11 @@
-.fa {
-	cursor:pointer;
-}
-:not(div):not(p)  {
-	border-bottom:grey 1px dotted;
-}
-
-/*
-.lb {
-	display:block;
-	cursor:pointer;
-	clear:right;
-}
-.gloss {
-}
-.hi {
-}
-.abbr {
-}
-.lb {
-}
-.sub {
-	text-decoration: line-through;
-	padding-bottom: -1em;
-	margin-bottom: -1em;	
-}
-*/
 .bold {
 	font-weight:900;
 }
-.italic {
+.italic, i {
 	font-style:italic;
 }
-.underline {
-	text-decoration:underline;	
+.underline, u {
+	text-decoration:underline;
 }
 .left {
 	text-align:left;
@@ -57,4 +30,42 @@ tei {
 }
 .marginLeft {
 	border-bottom: grey 1px dotted;
+}
+p *:not(ptr) {
+  color:#111;
+  cursor:pointer;
+  border-bottom:#111 1px dashed;
+}
+
+l::after,
+lb::after,
+lg::after,
+note::after,
+app::after {
+  content: '\A';
+  white-space: pre-wrap;
+}
+
+hi[rend='underline'],
+hi[rend='u'] {
+	border-bottom:black 1px solid;
+}
+hi[rend='bold'] {
+	font-weight:bold;
+}
+hi[rend='italic'],
+hi[rend='i'] {
+  font-style: italic;
+}
+
+note, app {
+  border-bottom:#0b6e02 double;
+}
+lb::before {
+  content: '\2B90';
+  color:#ba2424;
+}
+ptr::before {
+  content: '\26B2';
+  color:#ba2424;
 }

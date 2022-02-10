@@ -4,12 +4,11 @@ head_css();
 
 echo head(array('title' => 'Transcript - Tags Disponibles'));
 
-echo flash(); 
+echo flash();
+
+include(PLUGIN_DIR . '/Transcript/views/admin/page/menu.php');
+
 ?>
-<a class='add button small green' href='<?php echo WEB_ROOT; ?>/admin/transcript'>Tags disponibles</a>
-<a class='add button small green' href='<?php echo WEB_ROOT; ?>/admin/transcript/controle'>R&egrave;gles de coh&eacute;rence</a>
-<a class='add button small green' href='<?php echo WEB_ROOT; ?>/admin/transcript/list'>Liste des transcriptions</a>
-<a class='add button small green' href='<?php echo WEB_ROOT; ?>/admin/transcript/stats'>Statistiques</a>
 
 <div style='clear:both;margin-bottom:30px;'>
   <label>Activer tous les tags</label>
@@ -23,7 +22,7 @@ echo flash();
 
 <script>
 window.jQuery = window.$ = jQuery;
-  
+
 jQuery(document).ready(function() {
 	$('#checkall-act').change(function() {
 		var state = $(this).prop('checked');
@@ -52,10 +51,10 @@ jQuery(document).ready(function() {
 	});
 	$('#transcript-export-options').click(function() {
      window.open('<?php echo WEB_ROOT; ?>/admin/transcript/export', '_blank');
-	});	
+	});
 	$('#transcript-import-options').click(function() {
      window.open('<?php echo WEB_ROOT; ?>/admin/transcript/import');
-	});		
+	});
 	$('#transcript-add-tag').click(function() {
     var tag = prompt('Nom du tag à ajouter', '');
     tag = tag.replace(/\d+/g, '').replace(/[^a-z0-9\s]/gi, '');
@@ -65,10 +64,10 @@ jQuery(document).ready(function() {
   });
 	$('#submit2').click(function() {
     if (confirm("Vous êtes sur le point de perdre tous vos réglages et d'en importer de nouveaux. Êtes-vous sûr de vouloir continuer ?")) {
-      return true;      
+      return true;
     } else {
       return false;
-    }  	
+    }
  	});
 
 });

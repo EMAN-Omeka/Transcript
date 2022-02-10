@@ -15,11 +15,11 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 	const ELEMENT_SET_NAME = 'Transcript';
 
   protected $_hooks = array(
-  		'public_content_top',
-  		'define_routes',
-  		'define_acl',
-  		'install',
-  		'admin_files_panel_buttons',
+		'public_content_top',
+		'define_routes',
+		'define_acl',
+		'install',
+		'admin_files_panel_buttons',
   );
 
   protected $_filters = array(
@@ -34,11 +34,13 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
         unset ($tabs['Transcript']);
         return $tabs;
   }
+
   public function filterAdminCollectionsFormTabs($tabs, $args)
   {
   	unset ($tabs['Transcript']);
   	return $tabs;
   }
+
   public function filterAdminFilesFormTabs($tabs, $args)
   {
         unset ($tabs['Transcript']);
@@ -47,7 +49,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 
   function hookAdminFilesPanelButtons($args)
   {
-    echo "<a class='big green button' href='" . WEB_ROOT . "/transcribe/" . $args['record']->id . "'>Transcrire ce fichier</a>";
+    echo "<a class='big green button' href='" . WEB_ROOT . "/transcript/browse?fileid=" . $args['record']->id . "'>Transcrire ce fichier</a>";
   }
 
   function hookPublicContentTop($args)
@@ -57,86 +59,59 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
     if (isset($params['action'])) {
       if ($params['action'] == 'transcribe' || ! isset($params['id'])) : return; endif;
     }
-    if (isset($params['id'])) {
+    if (isset($params['id']) && $params['action'] == 'files-show') {
       $file = get_record_by_id('file', $params['id']);
+      // Si le fichier n'est pas public, on ne fait rien.
+      if (! isset($file) && ! $file) : return; endif;
     }
-    // Si le fichier n'est pas public, on ne fait rien.
-    if (! isset($file)) : return; endif;
 
   	if ($currentUser = current_user()) {
   		$transcribeLink = "";
-  		if ($params['controller'] == 'files' && $params['action'] == 'show' || $params['controller'] == 'eman' && $params['action'] == 'files-show') {
-  			if (in_array($currentUser->role, array('super', 'admin', 'author', 'editor', 'researcher'))) {
-  				$transcribeLink = WEB_ROOT . "/transcribe/" . $params['id'];
-  				print "<a class='eman-edit-link' style='margin-top:-55px;' href='$transcribeLink'>Transcrire ce fichier</a>";
+			if (in_array($currentUser->role, array('super', 'admin', 'author', 'editor', 'researcher'))) {
+    		if ($params['controller'] == 'files' && $params['action'] == 'show' || $params['controller'] == 'eman' && $params['action'] == 'files-show') {
+  				$transcribeLink = WEB_ROOT . "/transcript/browse?fileid=" . $params['id'];
+    			$linkText = 'Voir la transcription et transcrire ce fichier';
+  			} elseif ($params['controller'] == 'eman' && $params['action'] == 'items-show') {
+    			$db = get_db();
+    			$fileId = $db->query("SELECT id FROM `$db->Files` f WHERE item_id = ? ORDER BY f.order ASC, id ASC LIMIT 1", $params['id'])->fetchObject();
+          if (! $fileId) : return; endif;
+    			$transcribeLink = WEB_ROOT . "/transcript/browse?fileid=" . $fileId->id;
+    			$linkText = 'Voir la transcription et transcrire cet item';
+  			}
+  			if (isset($linkText)) {
+  				print "<a class='eman-edit-link' style='margin-top:-55px;' href='$transcribeLink'>$linkText</a>";
   			}
   	  }
+    } else {
+ 			$db = get_db();
+      $viewLink = "";
+			$tElementId = $db->query("SELECT id FROM `$db->Elements` WHERE name ='Transcription' AND description = 'A TEI tagged representation of the document.'")->fetchObject()->id;
+      if ($params['controller'] == 'files' && $params['action'] == 'show' || $params['controller'] == 'eman' && $params['action'] == 'files-show') {
+        $hasTranscription = $db->query("SELECT 1 yes FROM `$db->ElementTexts` WHERE record_id = ? AND record_type = 'File' AND element_id = ?", [$params['id'], $tElementId])->fetchObject();
+        if (isset($hasTranscription->yes)) {
+  				$viewLink = WEB_ROOT . "/transcript/browse?fileid=" . $params['id'];
+    			$linkText = 'Voir la transcription de ce fichier';
+        }
+			} elseif ($params['controller'] == 'eman' && $params['action'] == 'items-show') {
+  			$fileId = $db->query("SELECT id FROM `$db->Files` f WHERE item_id = ? ORDER BY f.order ASC, id ASC LIMIT 1", $params['id'])->fetchObject()->id;
+        $hasTranscription = $db->query("SELECT 1 yes FROM `$db->ElementTexts` e LEFT JOIN `$db->Files` f ON f.id = e.record_id LEFT JOIN `$db->Items` i ON f.item_id = i.id WHERE e.record_type = 'File' AND i.id = ? AND e.element_id = ?", [$params['id'], $tElementId])->fetchObject();
+        if (isset($hasTranscription->yes)) {
+    			$viewLink = WEB_ROOT . "/transcript/browse?fileid=" . $fileId;
+    			$linkText = 'Voir la transcription de cet item';
+    		}
+  		}
+			if (isset($linkText) && ! isset($params['error_handler'])) {
+				print "<a class='eman-edit-link' style='margin-top:-55px;' href='$viewLink'>$linkText</a>";
+			}
     }
-
-    // Lien vers la transcription
-  	if ($params['controller'] == 'files' && $params['action'] == 'show' || $params['controller'] == 'eman' && $params['action'] == 'files-show') {
-    	$xmlFileName =  substr($file->filename, 0, strpos($file->filename, '.')) . '.xml';
-    	if (file_exists(BASE_DIR . '/teibp/transcriptions/' . $xmlFileName)) :
-        print "<a class='eman-edit-link' style='margin-top:-30px;' href='" . WEB_ROOT . "/transcription/" . metadata('file', 'id') . "'>Afficher la transcription</a>";
-      endif;
-		}
-
   	return true;
   }
 
 
   function hookDefineRoutes($args)
   {
-  	// Don't add these routes on the public side to avoid conflicts.
 		$router = $args['router'];
-		// Add transcribe page.
-		$router->addRoute(
-				'transcript_view',
-				new Zend_Controller_Router_Route(
-						'transcription/:fileid',
-						array(
-								'module' => 'transcript',
-								'controller'   => 'page',
-								'action'       => 'view',
-								'fileid'			=> ''
-						)
-				)
-		);
-		$router->addRoute(
-				'transcript_transcribe_form',
-				new Zend_Controller_Router_Route(
-						'transcribe/:fileid',
-						array(
-								'module' => 'transcript',
-								'controller'   => 'page',
-								'action'       => 'transcribe',
-								'fileid'			=> ''
-						)
-				)
-		);
 		// Add admin pages.
-		$router->addRoute(
-				'transcript_admin',
-				new Zend_Controller_Router_Route(
-						'transcript',
-						array(
-								'module' => 'transcript',
-								'controller'   => 'page',
-								'action'       => 'admin',
-						)
-				)
-		);
-		$router->addRoute(
-				'transcript_admin_controle',
-				new Zend_Controller_Router_Route(
-						'transcript/controle',
-						array(
-								'module' => 'transcript',
-								'controller'   => 'page',
-								'action'       => 'controle',
-						)
-				)
-		);
 		$router->addRoute(
 				'transcript_admin_list',
 				new Zend_Controller_Router_Route(
@@ -146,18 +121,6 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 								'controller'   => 'page',
 								'action'       => 'list',
 						)
-				)
-		);
-		// Add exports pages.
-		$router->addRoute(
-				'transcript_export_tei',
-				new Zend_Controller_Router_Route(
-						'transcript/exporttei/:fileid',
-						array(
-								'module' => 'transcript',
-								'controller'   => 'page',
-								'action'       => 'exporttei',
-								'fileid'			=> '',  						)
 				)
 		);
 		$router->addRoute(
@@ -172,14 +135,183 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 				)
 		);
 		$router->addRoute(
-				'transcript_admin_reset',
+				'transcript_admin_options',
 				new Zend_Controller_Router_Route(
-						'transcript/reset',
+						'transcript/options',
 						array(
 								'module' => 'transcript',
 								'controller'   => 'page',
-								'action'       => 'reset',
+								'action'       => 'options',
 						)
+				)
+		);
+		$router->addRoute(
+				'transcript_validate',
+				new Zend_Controller_Router_Route(
+						'transcript/validate',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'validate',
+								'xml'			=> ''
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_browser',
+				new Zend_Controller_Router_Route(
+						'transcript/browse',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'browse',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_fetch_files_for_item',
+				new Zend_Controller_Router_Route(
+						'transcript/fetchfiles',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'ajax-fetch-files',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_fetch_transcription',
+				new Zend_Controller_Router_Route(
+						'transcript/fetchtranscription',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'ajax-fetch-transcription',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_fetch_rendition',
+				new Zend_Controller_Router_Route(
+						'transcript/fetchrendition',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'ajax-fetch-rendition',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_fetch_files_gallery',
+				new Zend_Controller_Router_Route(
+						'transcript/fetchfilesgallery',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'ajax-fetch-files-gallery',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_fileid_fromitemid',
+				new Zend_Controller_Router_Route(
+						'transcript/fetchitemid',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'ajax-item-id-from-file-id',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_fetch_file_picture',
+				new Zend_Controller_Router_Route(
+						'transcript/fetchfilepicture',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'ajax-fetch-file-picture',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_regroup',
+				new Zend_Controller_Router_Route(
+						'transcript/regroup',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'regroup',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_import',
+				new Zend_Controller_Router_Route(
+						'transcript/importtranscription',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'import-transcription',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_do_import',
+				new Zend_Controller_Router_Route(
+						'transcript/do-import',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'do-import',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_show_term',
+				new Zend_Controller_Router_Route(
+						'transcript/show/:term',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'page',
+								'action'       => 'show-term',
+								'term'       => '',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_list_terms',
+				new Zend_Controller_Router_Route(
+						'transcript/glossaire',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'page',
+								'action'       => 'glossaire',
+						)
+				)
+		);
+		$router->addRoute(
+				'transcript_refresh_index',
+				new Zend_Controller_Router_Route(
+						'transcript/index',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'page',
+								'action'       => 'index',
+						)
+				)
+		);
+    // Add import/export pages.
+		$router->addRoute(
+				'transcript_export_tei',
+				new Zend_Controller_Router_Route(
+						'transcript/exporttei/:fileid',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'page',
+								'action'       => 'exporttei',
+								'fileid'			=> '',
+            )
 				)
 		);
 		$router->addRoute(
@@ -217,7 +349,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
   	$nav[] = array(
   			'label' => __('Transcript'),
   			'uri' => url('transcript/list'),
-//   			'resource' => 'Transcript_Page',
+  			'resource' => 'Transcript_Page',
   	);
   	return $nav;
   }
@@ -227,7 +359,6 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
   	$acl = $args['acl'];
   	$TranscriptAdmin = new Zend_Acl_Resource('Transcript_Page');
   	$acl->add($TranscriptAdmin);
-//     $acl->allow(array('super', 'admin'), array('Transcript_Page'));
     $acl->allow(array('super', 'admin'), 'Transcript_Page', 'admin');
 
     if (plugin_is_active("More User Roles")) {
@@ -236,8 +367,8 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
       $users = array('researcher');
     }
     $acl->deny($users, 'Transcript_Page');
-    $acl->allow($users, 'Transcript_Page', array('list', 'stats', 'transcribe'));
-    $acl->allow(null, 'Transcript_Page', array('view'));
+    $acl->allow(null, 'Transcript_Page', null);
+
   }
 
   /**
@@ -246,32 +377,45 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
   public function hookInstall()
   {
   	// Don't install if an element set by the name "Transcript" already exists.
-  	if ($this->_db->getTable('ElementSet')->findByName(self::ELEMENT_SET_NAME)) {
+  	if (! $this->_db->getTable('ElementSet')->findByName(self::ELEMENT_SET_NAME)) {
+
+    	$elementSetMetadata = array('name' => self::ELEMENT_SET_NAME);
+    	$elements = array(
+    			array('name' => 'Transcription',
+    					'description' => 'A TEI tagged representation of the document.')
+    	);
+    	insert_element_set($elementSetMetadata, $elements);
+
+/*
   		throw new Omeka_Plugin_Installer_Exception(
   				__('An element set by the name "%s" already exists. You must delete '
   						. 'that element set to install this plugin.', self::ELEMENT_SET_NAME)
   		);
+*/
   	}
-
-  	$elementSetMetadata = array('name' => self::ELEMENT_SET_NAME);
-  	$elements = array(
-  			array('name' => 'Transcription',
-  					'description' => 'A TEI tagged representation of the document.')
-  	);
-  	insert_element_set($elementSetMetadata, $elements);
 
   	// Create table for admin
   	$db = $this->_db;
   	$sql = "CREATE TABLE IF NOT EXISTS `$db->Transcript` (
-  	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  	`active` int(10) unsigned NOT NULL DEFAULT 0,
-  	`name` varchar(1000) NOT NULL,
-  	`properties` varchar(1000) NOT NULL,
-  	PRIMARY KEY (`id`)
+    	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    	`active` int(10) unsigned NOT NULL DEFAULT 0,
+    	`name` varchar(1000) NOT NULL,
+    	`properties` varchar(1000) NOT NULL,
+      PRIMARY KEY (`id`)
+  	) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+  	$db->query($sql);
+
+  	$sql = "CREATE TABLE IF NOT EXISTS `$db->TranscriptTerms` (
+    	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    	`name` varchar(1000) NOT NULL,
+    	`definition` varchar(1000) NOT NULL,
+    	`occurrences` varchar(5000) NULL,
+    	`fieldsvalues` varchar(5000) NULL,
+    	`linkedterms` varchar(500) NULL,
+    	PRIMARY KEY (`id`)
   	) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
   	$db->query($sql);
 
   	$this->_installOptions();
   }
-
 }
