@@ -116,4 +116,4 @@ Du code a aussi été emprunté au projet [XML4TEI](https://orazionelson.github.
 
 **Le début du développement de ce module a été réalisé avec le soutien de la bibliothèque Lettres de l'ENS.**
 
-**La version 0.9 actuelle a été réalisée avec le soutien du projet Collex Amor (Université Paris-Saclay). **
+**La version 0.9 actuelle a été réalisée avec le soutien du projet Collex Amor (Université Paris-Saclay).**
