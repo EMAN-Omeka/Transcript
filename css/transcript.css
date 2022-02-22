@@ -296,6 +296,8 @@ dt.fn-number {
   font-size: 1.2em;
   color:#bb2222;
 }
-#regroup {
+#regroup, #suppress {
   display:none;
+  text-transform: none;
+  margin-right:1em;
 }

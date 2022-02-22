@@ -114,16 +114,15 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
    		$fileName = str_replace(['png', 'PNG', 'jpeg', 'JPEG', 'JPG'], 'jpg', metadata($file, 'filename'));
    		$title = metadata($file, ['Dublin Core', 'Title']);
    		$title ? null : $title = "[Sans Titre] - Fichier $fileId";
-   		$image = "<h3>$title</h3><a id='transcript-image-anchor-$fileId' /><div class='click-zoom'><label><input type='checkbox'><img src='" . WEB_ROOT . '/files/fullsize/' . $fileName . "' id='transcript-image-$fileId' class='transcript-image' /></label></div>";
-      $this->_helper->json($image);
+   		$image = "<h3>$title</h3><a id='transcript-image-anchor-$fileId' /><div class='click-zoom'><label><input type='checkbox' /><img src='" . WEB_ROOT . '/files/fullsize/' . $fileName . "' id='transcript-image-$fileId' class='transcript-image' /></label></div>";
+      $this->_helper->json([$image]);
     } else {
+      $error = '';
    		if (! is_numeric($fileId)) {
      		$error .= "<br /> .. l'identifiant ne semble pas être numérique.";
    		}
-   		$error = "<a id='transcript-image-anchor-$fileId' /><h4>Fichier image avec l'id '" . $fileId . "' non trouvé.";
-   		$error .= "</h4>";
+   		$error .= "<a id='transcript-image-anchor-$fileId' /><h4>Fichier image avec l'id '" . $fileId . "' non trouvé.</h4>";
 	    $this->_helper->json($error);
-	    return true;
     }
   }
 
@@ -134,6 +133,7 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
  		}
  		$db = $this->db;
  		$file = get_record_by_id('File', $fileId);
+    $firstFileId = $this->firstFileId($file->item_id);
     $fileInfo = "<h1><a target='_blank' href='". WEB_ROOT . '/files/fullsize/' . $file->filename . "'>Fichier original brut</a> - <a target='_blank' href='" . WEB_ROOT . "/files/show/" . $file->id . "'>Notice du fichier</a> - <a target='_blank' href='" . WEB_ROOT . "/teibp/transcriptions/" . str_replace(['png', 'PNG', 'jpeg', 'JPEG', 'JPG', 'jpg'], 'xml', $file->filename) ."'>Transcription TEI du fichier</a> - <a target='_blank' href='" . WEB_ROOT . "/items/show/" . $file->item_id . "'>Notice de l'item</a></h1>";
 
  		$transcription = $db->query("SELECT e.text text FROM `$db->Files` f LEFT JOIN `$db->ElementTexts` e ON f.id = e.record_id AND e.record_type = 'File' AND e.element_id = ? WHERE f.id = $fileId", $this->transcriptionTermId)->fetchObject();
@@ -144,7 +144,7 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
 
  		$image = "<a id='transcript-image-anchor-$fileId' /><h3>$title</h3><div class='click-zoom'><label><input type='checkbox'><img src='" . WEB_ROOT . '/files/fullsize/' . $fileName . "' id='transcript-image-$fileId' class='transcript-image' /></div></div>";
     $transcription->text ? $termes = $this->termOccurrences($transcription->text) : $termes = "";
-    $this->_helper->json(['transcription' => $transcription->text, 'image' => $image, 'fileinfo' => $fileInfo, 'termes' => $termes]);
+    $this->_helper->json(['transcription' => $transcription->text, 'image' => $image, 'fileinfo' => $fileInfo, 'firstfileid' => $firstFileId, 'termes' => $termes]);
 	}
 
   public function ajaxFetchRenditionAction() {
@@ -161,15 +161,16 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
     $messages = '';
  		$transcription = $db->query("SELECT e.text text FROM `$db->Files` f LEFT JOIN `$db->ElementTexts` e ON f.id = e.record_id AND e.record_type = 'File' AND e.element_id = ? WHERE f.id = $fileId", $this->transcriptionTermId)->fetchObject();
 
-		$firstFile = $db->query("SELECT id FROM `$db->Files` f WHERE item_id = ? ORDER BY f.order LIMIT 1", $fichier->item_id)->fetchObject();
-    if ($fileId <> $firstFile) {
+		$firstFileId = $this->firstFileId($fichier->item_id);
+
+    if ($fileId <> $firstFileId) {
       // PTR ?
       libxml_use_internal_errors(true);
       $xml = new DOMdocument;
       $xml->encoding = "utf-8";
       $xml->formatOutput = true;
       $xml->preserveWhiteSpace = false;
-      $firstFileTranscription = $db->query("SELECT e.text text FROM `$db->Files` f LEFT JOIN `$db->ElementTexts` e ON f.id = e.record_id AND e.record_type = 'File' AND e.element_id = ? WHERE f.id = ?", [$this->transcriptionTermId, $firstFile->id])->fetchObject();
+      $firstFileTranscription = $db->query("SELECT e.text text FROM `$db->Files` f LEFT JOIN `$db->ElementTexts` e ON f.id = e.record_id AND e.record_type = 'File' AND e.element_id = ? WHERE f.id = ?", [$this->transcriptionTermId, $firstFileId])->fetchObject();
       @$xml->loadXML($firstFileTranscription->text, LIBXML_PARSEHUGE);
       $ptrs = $xml->getElementsByTagName('ptr');
       $fileIds = [];
@@ -178,7 +179,7 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
         $ptr->getAttribute('target') ? $fileIds[] = $ptr->getAttribute('target') : $fileIds[$i] = -1;
       }
       if (in_array($fileId, $fileIds)) {
-        $messages = "Attention : ce fichier est référencé dans la transcription du <a href='" . WEB_ROOT . "/transcript/browse?fileid=$firstFile->id'>premier fichier de cet item</a>";
+        $messages = "Attention : ce fichier est référencé dans la transcription du <a href='" . WEB_ROOT . "/transcript/browse?fileid=$firstFileId'>premier fichier de cet item</a>";
       }
     }
 
@@ -220,7 +221,7 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
       $result = "<p>Vous ne semblez pas avoir configuré l'URL TEI Publisher.</p>";
     }
 
-    $this->_helper->json(['transcription' => $result, 'fileinfo' => $fileInfo, 'termes' => $termes]);
+    $this->_helper->json(['transcription' => $result, 'fileinfo' => $fileInfo, 'firstfileid' => $firstFileId, 'termes' => $termes]);
   }
 
 	public function ajaxFetchFilesGalleryAction() {
@@ -281,6 +282,7 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
     if ($this->user) {
       $toolbar = $this->getToolbarForm($itemId, $fileId);
       $toolbar .= "<button id='regroup'>Regrouper les transcriptions de cet item.</button>";
+      $toolbar .= "<button id='suppress'>Supprimer les transcriptions des autres fichiers de cet item.</button>";
     } else {
       $item = get_record_by_id('Item', $itemId);
       $toolbar = "<h3>" . strip_tags(metadata($item, ['Dublin Core', 'Title'])) . "</h3>";
@@ -327,9 +329,9 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
 			if ($form->isValid($formData)) {
   			$doc = new DOMDocument();
   			$xml = $doc->createDocumentFragment();
-  			$xml->appendXML(str_replace("&nbsp;", "", $formData['transcription']));
+  			@$xml->appendXML(str_replace("&nbsp;", "", $formData['transcription']));
         $xml = $doc->importNode($xml, true);
-        $doc->appendChild($doc->createElement('body'))->appendChild($xml);
+        @$doc->appendChild($doc->createElement('body'))->appendChild($xml);
 				$this->saveTranscription($doc->saveXML($doc->documentElement, LIBXML_NOXMLDECL), $fileId);
 			}
 		}
@@ -375,8 +377,8 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
 		$db = $this->db;
 
 		if ($xml == "<div></div>" || $xml == "<body><div/></body>" || $xml == "<body/>" || strpos($xml, '<body/>')) {
-			$db->query("DELETE FROM `$db->ElementTexts` WHERE record_id = $fileId AND element_id = $transcriptionElementId");
-			unlink($transcriptionsDir. $xmlFileName);
+			$db->query("DELETE FROM `$db->ElementTexts` WHERE record_id = ? AND element_id = ?", [$fileId, $this->transcriptionTermId]);
+			@unlink($transcriptionsDir. $xmlFileName);
 			$this->_helper->flashMessenger('Transcription effacée.');
 		} else {
 			$old = $db->query("SELECT 1 FROM `$db->ElementTexts` WHERE record_id = $fileId AND record_type = 'File' AND element_id = ?", [$this->transcriptionTermId])->fetchAll();
@@ -662,7 +664,7 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
       $xml = @new SimpleXMLElement($transcription);
       $xml = $xml->text;
     } catch (Exception $e) {
-      if ($this->user <> 'public') {
+      if ($this->user->role <> 'public') {
         $resp = "Les termes ne peuvent pas être extraits.<br />Le code de la transcription n'est pas valide, veuillez le vérifier.";
       } else {
         $resp = "Il n'y a pas de termes indexés dans cette transcription.";
@@ -682,9 +684,16 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
       $termes[] = "<a target='_blank' href='" . WEB_ROOT . "/transcript/show/$t'>$t</a>";
     }
     $termes = eman_sort_array($termes, 'text');
-    empty($termes) ? $termes = "" : $termes = ["<h3>Liste des termes indexés dans cette transcription</h3>" . implode(', ', array_unique($termes))];
+    $message = "<h3>Liste des termes indexés dans cette transcription</h3>";
+    empty($termes) ? $termes = [$message . "Il n'y a pas de termes indexés dans cette transcription."] : $termes = [$message . implode(', ', array_unique($termes))];
 
     return $termes;
+  }
+
+  private function firstFileId($itemId) {
+    $db = $this->db;
+    $fileId = $db->query("SELECT f.id FROM `$db->Files` f RIGHT JOIN `$db->ElementTexts` e ON e.record_id = f.id AND e.record_type = 'File' AND e.element_id = ? WHERE f.item_id = ? ORDER BY f.order, f.id LIMIT 1", [$this->transcriptionTermId, $itemId])->fetchObject();
+    return $fileId->id;
   }
 
   public function regroupAction() {
@@ -708,6 +717,25 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
       $transcription = "<body>$transcription</body>";
     }
     $this->_helper->json($transcription);
+  }
+
+  public function suppressAction() {
+    $db = $this->db;
+    $itemId = $this->getParam('itemid');
+    // Base
+    $firstfileId = $this->firstFileId($itemId);
+    $query = "DELETE FROM `$db->ElementTexts` WHERE record_type = 'File' AND element_id = ? AND record_id IN (SELECT id FROM `$db->Files` WHERE item_id = ? AND id <> ?)";
+    $db->query($query, [$this->transcriptionTermId, $itemId, $firstfileId])->execute();
+    // Fichiers
+    $query = "SELECT filename FROM `$db->Files` WHERE item_id = ? AND id <> ?";
+    $filenames = $db->query($query, [$itemId, $firstfileId])->fetchAll();
+    $files = [];
+    foreach ($filenames as $i => $filename) {
+      $filename = BASE_DIR . '/teibp/transcriptions/' . str_replace(['png', 'PNG', 'jpeg', 'JPEG', 'JPG', 'jpg'], 'xml', $filename['filename']);
+      unlink($filename);
+      $files[] = $filename;
+    }
+    $this->_helper->json("Transcriptions supprimées pour l'item " . $itemId . ".<br />Fichiers supprimés : " . implode(', ', $files));
   }
 
 	private function prettifyForm($form) {

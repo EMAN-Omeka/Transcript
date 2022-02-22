@@ -246,6 +246,17 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
 				)
 		);
 		$router->addRoute(
+				'transcript_suppress',
+				new Zend_Controller_Router_Route(
+						'transcript/suppress',
+						array(
+								'module' => 'transcript',
+								'controller'   => 'browser',
+								'action'       => 'suppress',
+						)
+				)
+		);
+		$router->addRoute(
 				'transcript_import',
 				new Zend_Controller_Router_Route(
 						'transcript/importtranscription',

@@ -123,6 +123,8 @@ function activate_menu_items() {
 			contexte[i] = 'tittle';
 			i = contexte.indexOf('figure');
 			contexte[i] = 'ffigure';
+			i = contexte.indexOf('table');
+			contexte[i] = 'ttable';
 			// TODO : gérer les maj/min => handShift
 			if ($.inArray(elementType.toLowerCase(), contexte) > -1 || balise == 'div' && elementType == 'body') {
 				// On le marque comme visible si le contexte l'autorise ...
@@ -258,8 +260,9 @@ function add_form_element(button) {
 }
 
 function XmlToTiny(code, mode) {
-  xml = ['handShift', 'persName', 'placeName', 'cRef', 'mimeType', 'table', 'head'];
-  tiny = ['handshift', 'persname', 'placename', 'cref', 'mimetype', 'ttable', 'headd'];
+  // TODO : Automatiser la détection et conversion de majuscules dans les tags == la constituion de ces tableaux
+  xml = ['handShift', 'persName', 'placeName', 'cRef', 'mimeType', 'table', 'head', 'castList', 'castItem'];
+  tiny = ['handshift', 'persname', 'placename', 'cref', 'mimetype', 'ttable', 'headd', 'castlist', 'castitem'];
   if (mode == 'tiny') {
     $(tiny).each(function (i, s) {
       exp = new RegExp(s, 'g');
@@ -312,5 +315,4 @@ function alphabetizeList(listField) {
    });
    sel.html('').append(opts_list);
    sel.val(selected); // set cached selected value
-   console.log(sel);
 }

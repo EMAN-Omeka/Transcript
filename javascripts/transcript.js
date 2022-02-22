@@ -3,7 +3,7 @@ window.jQuery = window.$ = $ = jQuery;
 boutons = [];
 var buttons;
 
-$(window).load(function() {
+$(window).on('load', function() {
 
   WEB_ROOT = $('#phpWebRoot').html();
   var textarea = document.getElementById('codemirror-edit');
@@ -332,10 +332,7 @@ $(window).load(function() {
     });
     var pics;
     $('#files').on('change', function() {
-      $('#regroup').hide();
-      if (this[0].value == $('#files').val() && ($('#userRole').html() == 'admin' || $('#userRole').html() == 'super')) {
-        $('#regroup').show();
-      }
+      $('#regroup, #suppress').hide();
       $('#fileid').val($('#files').val());
       $('#files-element #file-id').remove();
       $('#transcript-rendition > *').remove();
@@ -351,6 +348,12 @@ $(window).load(function() {
         dataType: 'json',
         success: function(response) {
           $('#file-info').html(response.fileinfo);
+          if (response.firstfileid == $('#files').val() && ($('#userRole').html() == 'admin' || $('#userRole').html() == 'super')) {
+            $('#regroup').show();
+            if ($('#userRole').html() == 'super') {
+              $('#suppress').show();
+            }
+          }
           termes = $.map(response.termes, function(e){
             return e;
           }).join(', ');
@@ -371,10 +374,10 @@ $(window).load(function() {
               url: WEB_ROOT + '/transcript/fetchfilepicture?fileid=' + $(ptr).attr('target'),
               dataType: 'json',
               success: function(picture) {
-                pictures[i] = picture;
+                pictures[i] = picture[0];
               },
               error: function(jqXHR, textStatus, errorThrown) {
-                console.log(errorThrown);
+//                 console.log(errorThrown);
                 console.log('File not found : ' + $(ptr).attr('target'));
               }
             });
@@ -387,6 +390,7 @@ $(window).load(function() {
           window.history.pushState('file' + $('#files').val(), 'Title', WEB_ROOT + '/transcript/browse?fileid=' + $('#files').val());
         }
       });
+      // TODO : Rendition is only for EMAN. For now.
       if (window.location.host == 'eman-archives.org') {
         $.ajax({
           url: WEB_ROOT + '/transcript/fetchrendition?fileid=' + $('#files').val(),
@@ -398,6 +402,7 @@ $(window).load(function() {
             } else {
               $('#messages').html('');
             }
+            $('#file-info').html(response.fileinfo);
             var checkExist = setInterval(function() {
               if ($(urlhash).length) {
                 if ($(urlhash).length > 1) {
@@ -461,6 +466,19 @@ $(window).load(function() {
 
     });
 
+    $('#toolbar').on('click', '#suppress', function() {
+        $.ajax({
+          url: WEB_ROOT + '/transcript/suppress?itemid=' + $('#items').val(),
+          dataType: 'json',
+          success: function(response) {
+            $('#messages').html(response);
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+
+    });
     $('#import-output').on('click', '#bt-import', function() {
       importOk = true;
       mapping = {};
@@ -588,6 +606,8 @@ $(window).load(function() {
 
   });
 
+// TODO : Is this code useless ?
+/*
   if (typeof getUrlVars()['fileid'] != 'undefined') {
     fileid = getUrlVars()['fileid'];
     $.ajax({
@@ -602,6 +622,7 @@ $(window).load(function() {
       }
     });
   }
+*/
   $.fn.xml4tei({
     helpLangs: ['fr'],
     helpJsondriver: "proxy",

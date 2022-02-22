@@ -17,7 +17,7 @@
     <children>cit</children>
     <children>link</children>
   </abbr>
-  <add place='top,bottom,margin,marginRight,marginLeft,opposite,overleaf,above,right,below,left,inline,inspace' type='' rend='' rendition='' medium='' source=''>
+  <add place='above,below,bottom,inline,inspace,left,margin,marginLeft,marginRight,opposite,overleaf,right,top' type='' rend='' rendition='' medium=''>
     <menuName>annot</menuName>
 	  <ihmName>Ajout</ihmName>
     <children>handShift</children>
@@ -49,7 +49,7 @@
     <children>link</children>
     <children>formula</children>
   </add>
-  <app type='' resp='' source=''>
+  <app type='' resp=''>
 	  <menuName>annot</menuName>
 	  <ihmName>Note appareil critique</ihmName>
     <children>note</children>
@@ -58,13 +58,28 @@
     <children>rdg</children>
     <children>cit</children>
   </app>
+  <bibl>
+	  <menuName>mef</menuName>
+	  <ihmName>Référence bibliographique</ihmName>
+    <children></children>
+  </bibl>
   <body>
 	  <menuName>struct</menuName>
 	  <ihmName>Body</ihmName>
 		<children>div</children>
   </body>
+  <castList>
+	  <menuName>mef</menuName>
+	  <ihmName>Nom de personnage</ihmName>
+		<children></children>
+  </castList>
+  <castItem>
+	  <menuName>mef</menuName>
+	  <ihmName>Distribution</ihmName>
+		<children></children>
+  </castItem>
   <cell>
-	  <menuName>struct</menuName>
+	  <menuName>mef</menuName>
 	  <ihmName>Cellule de tableau</ihmName>
     <children>handShift</children>
     <children>p</children>
@@ -94,15 +109,15 @@
     <children>link</children>
   </cell>
   <choice>
-    	  <menuName>annot</menuName>
-    	  <ihmName>Choix</ihmName>
-        <children>abbr</children>
-        <children>expan</children>
-        <children>orig</children>
-        <children>reg</children>
-        <children>seg</children>
+	  <menuName>annot</menuName>
+	  <ihmName>Choix</ihmName>
+    <children>abbr</children>
+    <children>expan</children>
+    <children>orig</children>
+    <children>reg</children>
+    <children>seg</children>
   </choice>
-  <cit type='' ref='' source='' >
+  <cit type='' ref=''>
 	  <menuName>mef</menuName>
 	  <ihmName>Citation</ihmName>
     <children>handShift</children>
@@ -134,7 +149,7 @@
   	  <ihmName>Date</ihmName>
       <children>seg</children>
   </date>
-  <del rend='blue,black,purple,red' subtype = 'double,overstrike' type='hand,handPencil,pencil,TypeWriter' source=''>
+  <del rend='' rendition='' type=''>
 	  <menuName>annot</menuName>
 	  <ihmName>Suppression</ihmName>
     <children>handShift</children>
@@ -203,7 +218,7 @@
     <children>cit</children>
     <children>link</children>
   </expan>
-  <figure place='top,bottom,margin,marginRight,marginLeft,opposite,overleaf,above,right,below,left,inline,inspace' type=''>
+  <figure place='above,below,bottom,inline,inspace,left,margin,marginLeft,marginRight,opposite,overleaf,right,top' type=''>
  	  <menuName>mef</menuName>
 	  <ihmName>Schéma/Figure</ihmName>
     <children>figdesc</children>
@@ -211,7 +226,7 @@
   <figdesc>
 	  <menuName>mef</menuName>
 	  <ihmName>Description de schéma/figure</ihmName>
-	  <children></children>
+    <children></children>
   </figdesc>
   <foreign xml:lang=''>
 	  <menuName>mef</menuName>
@@ -243,7 +258,7 @@
   </formula>
   <gap reason=''>
   	<menuName>annot</menuName>
-  	<ihmName>Omission</ihmName>
+  	<ihmName>Lacune</ihmName>
     <children></children>
   </gap>
   <handShift medium='' rend='' scribe=''>
@@ -419,7 +434,7 @@
     <children>head</children>
     <children>item</children>
   </list>
-  <metamark place='top,bottom,margin,marginRight,marginLeft,opposite,overleaf,above,right,below,left,inline,inspace' rendition='' function=''>
+  <metamark place='above,below,bottom,left,inline,inspace,margin,marginLeft,marginRight,opposite,overleaf,right,top' rendition='' function=''>
     <menuName>mef</menuName>
     <ihmName>Signe graphique</ihmName>
     <children></children>
@@ -492,6 +507,7 @@
     <children>formula</children>
     <children>ptr</children>
     <children>quote</children>
+    <children>bibl</children>
   </p>
   <persName ref='' type=''>
 	  <menuName>annot</menuName>
@@ -511,7 +527,7 @@
   </persName>
   <placeName ref='' type=''>
 	  <menuName>annot</menuName>
-	  <ihmName>Nom de lieue</ihmName>
+	  <ihmName>Nom de lieu</ihmName>
     <children>forename</children>
     <children>geogName</children>
     <children>orgName</children>
@@ -530,7 +546,7 @@
 	  <ihmName>Changement de fichier Omeka</ihmName>
     <children></children>
   </ptr>
-  <quote>
+  <quote type=''>
 	  <menuName>mef</menuName>
 	  <ihmName>Citation sans référence</ihmName>
     <children></children>
@@ -585,6 +601,11 @@
 	  <ihmName>Segment</ihmName>
     <children></children>
   </seg>
+  <set>
+	  <menuName>mef</menuName>
+	  <ihmName>Description de décor</ihmName>
+    <children></children>
+  </set>
   <sic ana=''>
 	  <menuName>annot</menuName>
 	  <ihmName>Erreur de l'auteur</ihmName>
@@ -623,6 +644,10 @@
     <children>p</children>
     <children>l</children>
     <children>speaker</children>
+    <children>stage</children>
+    <children>set</children>
+    <children>castList</children>
+    <children>castItem</children>
   </sp>
   <speaker>
 	  <menuName>mef</menuName>
@@ -638,6 +663,11 @@
     <children>cit</children>
     <children>link</children>
   </speaker>
+  <stage>
+	  <menuName>mef</menuName>
+	  <ihmName>Indication scénique</ihmName>
+    <children></children>
+  </stage>
   <subst>
 	  <menuName>annot</menuName>
 	  <ihmName>Substitution</ihmName>
@@ -646,7 +676,7 @@
   </subst>
   <table>
 	  <menuName>mef</menuName>
-	  <ihmName>Table</ihmName>
+	  <ihmName>Tableau</ihmName>
     <children>head</children>
     <children>row</children>
   </table>
