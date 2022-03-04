@@ -279,7 +279,7 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
 		$this->view->pager = files_pager('/transcript/browse?fileid=', 'transcriptions');
 
     // Browser code
-    if ($this->user) {
+    if ($this->user->role <> 'public') {
       $toolbar = $this->getToolbarForm($itemId, $fileId);
       $toolbar .= "<button id='regroup'>Regrouper les transcriptions de cet item.</button>";
       $toolbar .= "<button id='suppress'>Supprimer les transcriptions des autres fichiers de cet item.</button>";
@@ -327,6 +327,11 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
 		if ($this->_request->isPost()) {
 			$formData = $this->_request->getPost();
 			if ($form->isValid($formData)) {
+/*
+  			Zend_Debug::dump($formData);
+  			die();
+*/
+  			// TODO : Quand PTR en premier, $formData est vide => ???
   			$doc = new DOMDocument();
   			$xml = $doc->createDocumentFragment();
   			@$xml->appendXML(str_replace("&nbsp;", "", $formData['transcription']));
@@ -378,7 +383,7 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
 
 		if ($xml == "<div></div>" || $xml == "<body><div/></body>" || $xml == "<body/>" || strpos($xml, '<body/>')) {
 			$db->query("DELETE FROM `$db->ElementTexts` WHERE record_id = ? AND element_id = ?", [$fileId, $this->transcriptionTermId]);
-			@unlink($transcriptionsDir. $xmlFileName);
+			unlink($transcriptionsDir. $xmlFileName);
 			$this->_helper->flashMessenger('Transcription effacée.');
 		} else {
 			$old = $db->query("SELECT 1 FROM `$db->ElementTexts` WHERE record_id = $fileId AND record_type = 'File' AND element_id = ?", [$this->transcriptionTermId])->fetchAll();
@@ -693,7 +698,7 @@ class Transcript_BrowserController extends Omeka_Controller_AbstractActionContro
   private function firstFileId($itemId) {
     $db = $this->db;
     $fileId = $db->query("SELECT f.id FROM `$db->Files` f RIGHT JOIN `$db->ElementTexts` e ON e.record_id = f.id AND e.record_type = 'File' AND e.element_id = ? WHERE f.item_id = ? ORDER BY f.order, f.id LIMIT 1", [$this->transcriptionTermId, $itemId])->fetchObject();
-    return $fileId->id;
+    if ($fileId) : return $fileId->id; else : return false; endif;
   }
 
   public function regroupAction() {

@@ -594,7 +594,7 @@
   <salute>
 	  <menuName>mef</menuName>
 	  <ihmName>Formule de politesse</ihmName>
-    <children></children>
+    <children>ptr</children>
   </salute>
   <seg type=''>
 	  <menuName>mef</menuName>
@@ -637,6 +637,7 @@
     <children>milestone</children>
     <children>cit</children>
     <children>link</children>
+    <children>ptr</children>
   </signed>
   <sp type=''>
 	  <menuName>mef</menuName>

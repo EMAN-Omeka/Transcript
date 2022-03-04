@@ -144,9 +144,9 @@ $(window).on('load', function() {
     'advlist autolink lists link image charmap print preview hr anchor pagebreak',
     'searchreplace wordcount visualblocks visualchars fullscreen',
     'insertdatetime media nonbreaking save contextmenu directionality',
-    'emoticons template paste textcolor colorpicker textpattern imagetools codesample'
+    'emoticons template paste textcolor colorpicker textpattern imagetools codesample code'
   ],
-    toolbar1: 'undo redo | insert | gras italique souligne | pleft pcenter pright pjustify | deletePTR',
+    toolbar1: 'undo redo | insert | gras italique souligne sup sub | charmap | pleft pcenter pright pjustify | carrierreturn deletePTR | code',
     toolbar2: fill_toolbar(),
     image_advtab: true,
     contextmenu: "link image inserttable",
@@ -215,6 +215,30 @@ $(window).on('load', function() {
           });
         }
       });
+      editor.addButton("sup", {
+        text: "",
+        balise: 'HI',
+        icon: 'superscript',
+        onpostrender: manageButtons,
+        onclick: function() {
+          var selection = tinymce.activeEditor.selection.getContent();
+          editor.undoManager.transact(function() {
+            tinymce.activeEditor.selection.setContent("<hi rend='sup'>" + selection + "</hi>");
+          });
+        }
+      });
+      editor.addButton("sub", {
+        text: "",
+        balise: 'HI',
+        icon: 'subscript',
+        onpostrender: manageButtons,
+        onclick: function() {
+          var selection = tinymce.activeEditor.selection.getContent();
+          editor.undoManager.transact(function() {
+            tinymce.activeEditor.selection.setContent("<hi rend='sub'>" + selection + "</hi>");
+          });
+        }
+      });
       editor.addButton("pleft", {
         text: "",
         balise: 'P',
@@ -271,6 +295,20 @@ $(window).on('load', function() {
           });
         }
       });
+      editor.addButton("carrierreturn", {
+        text: "",
+        balise: 'LB',
+        icon: 'arrowleft',
+        onpostrender: manageButtons,
+        onclick: function() {
+          var selection = tinymce.activeEditor.selection.getContent({
+            format: 'text'
+          });
+          editor.undoManager.transact(function() {
+            tinymce.activeEditor.selection.setContent("<lb />");
+          });
+        }
+      });
       editor.addButton("deletePTR", {
         text: "",
         balise: 'ptr',
@@ -294,6 +332,7 @@ $(window).on('load', function() {
           });
         }
       });
+
       $.each(boutons, function(i, bouton) {
         add(editor, bouton);
       });

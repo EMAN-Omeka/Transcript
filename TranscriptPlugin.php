@@ -79,7 +79,7 @@ class TranscriptPlugin extends Omeka_Plugin_AbstractPlugin
     			$linkText = 'Voir la transcription et transcrire cet item';
   			}
   			if (isset($linkText)) {
-  				print "<a class='eman-edit-link' style='margin-top:-55px;' href='$transcribeLink'>$linkText</a>";
+  				print "<a class='eman-edit-link' id='transcript-view-transcription' href='$transcribeLink'>$linkText</a>";
   			}
   	  }
     } else {

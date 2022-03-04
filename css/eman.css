@@ -57,7 +57,12 @@ hi[rend='italic'],
 hi[rend='i'] {
   font-style: italic;
 }
-
+hi[rend='sup'] {
+  vertical-align: super;
+}
+hi[rend='sub'] {
+  vertical-align: sub;
+}
 note, app {
   border-bottom:#0b6e02 double;
 }

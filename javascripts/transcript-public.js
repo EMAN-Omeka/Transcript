@@ -17,8 +17,10 @@ $(document).ready(function() {
       dataType: 'json',
       success: function(response) {
         $('#files').children().remove();
-        $.each(response, function(id, file) {
-          $('#files').append('<option value="' + id + '">' + file + '</option>');
+        response = Object.keys(response).map((key) => [Number(key), response[key]]);
+        response.sort((a,b) => (a[1] > b[1]) ? 1 : ((a[1] < b[1]) ? -1 : 0))
+        $.each(response, function(i, r) {
+          $('#files').append('<option value="' + r[0] + '">' + r[1].substr(5) + '</option>');
         });
         $('#trancript-pictures > *').remove();
         $('#transcript-image-container > *').remove();
@@ -45,7 +47,6 @@ $(document).ready(function() {
     $('#trancript-rendered').html('');
     $('#termes-info').html();
     $('#files-element').append("<span id='file-id'><a target='_blank' href='" + WEB_ROOT + "/files/show/" + $('#files').val() + "'>File id : " + $('#files').val() + "</a></span>");
-//     pictures = {};
     pictures = [];
     if (window.location.host == 'eman-archives.org') {
       $.ajax({

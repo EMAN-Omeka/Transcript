@@ -168,6 +168,10 @@ a.sub-file {
 #toolbar {
   clear: both;
 }
+#toolbar h3 {
+  margin-top:0;
+}
+
 form.public {
   display:none;
 }
@@ -247,14 +251,13 @@ dt.fn-number {
 }
 
 .click-zoom img {
-  width:1000px
-  margin: 200px;
+  width:1000px;
   transition: transform 0.25s ease;
   cursor: zoom-in;
 }
 
 .click-zoom input[type=checkbox]:checked~img {
-  transform: scale(3);
+  transform: scale(3) translate(+33%);
   cursor: zoom-out;
 }
 
